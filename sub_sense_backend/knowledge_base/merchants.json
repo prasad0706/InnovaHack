@@ -1,0 +1,23 @@
+{
+  "netflix": {"canonical": "Netflix", "category": "Entertainment"},
+  "netflix.com": {"canonical": "Netflix", "category": "Entertainment"},
+  "spotify": {"canonical": "Spotify", "category": "Music"},
+  "spotify india": {"canonical": "Spotify", "category": "Music"},
+  "google youtube": {"canonical": "YouTube Premium", "category": "Entertainment"},
+  "youtube premium": {"canonical": "YouTube Premium", "category": "Entertainment"},
+  "prime video": {"canonical": "Amazon Prime", "category": "Entertainment"},
+  "amazon prime": {"canonical": "Amazon Prime", "category": "Entertainment"},
+  "adobe": {"canonical": "Adobe Creative Cloud", "category": "Software"},
+  "adobe systems": {"canonical": "Adobe Creative Cloud", "category": "Software"},
+  "apple.com/bill": {"canonical": "Apple iCloud", "category": "Cloud Services"},
+  "icloud": {"canonical": "Apple iCloud", "category": "Cloud Services"},
+  "chatgpt": {"canonical": "ChatGPT Plus", "category": "AI Tools"},
+  "openai": {"canonical": "ChatGPT Plus", "category": "AI Tools"},
+  "hotstar": {"canonical": "Disney+ Hotstar", "category": "Entertainment"},
+  "disney hotstar": {"canonical": "Disney+ Hotstar", "category": "Entertainment"},
+  "swiggy one": {"canonical": "Swiggy One", "category": "Food & Delivery"},
+  "zomato gold": {"canonical": "Zomato Gold", "category": "Food & Delivery"},
+  "cult fit": {"canonical": "Cult.fit Pass", "category": "Fitness"},
+  "gym membership": {"canonical": "Local Gym Pass", "category": "Fitness"},
+  "linkedin": {"canonical": "LinkedIn Premium", "category": "Career"}
+}
