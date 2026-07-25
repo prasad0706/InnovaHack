@@ -13,10 +13,10 @@
     "name": "prasad",
     "password_hash": "f52733ee084a032f52bf6fd01786850b6f35e245cf99af7b75670b9c66022df5",
     "salt": "db307f10b904cb715587bff18cca8fa9",
-    "token": "0yAgTwKwONwLIfB5ERus4bnfChvDXrirvfocTev6bF4",
+    "token": "nOJzLFIcTxgn-RdtvVvxrFsDw2PDIz3U5ws6ZCS_L4Q",
     "is_bank_connected": true,
-    "connected_bank": "HDFC",
-    "bank_connected_at": "2026-07-25T17:31:48.706727+00:00"
+    "connected_bank": "Axis",
+    "bank_connected_at": "2026-07-25T19:53:08.442378+00:00"
   },
   "prasad131@gmail.com": {
     "id": "3e4479cc-ec28-41b2-94a4-66b8c10417e0",

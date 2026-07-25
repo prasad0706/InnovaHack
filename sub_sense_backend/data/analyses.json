@@ -227,7 +227,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost software subscription.",
+        "action_reason": "High-cost software subscription.",
         "monthly_saving": 1675.0
       },
       {
@@ -269,7 +269,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost entertainment subscription.",
+        "action_reason": "High-cost entertainment subscription.",
         "monthly_saving": 649.0
       },
       {
@@ -918,7 +918,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost software subscription.",
+        "action_reason": "High-cost software subscription.",
         "monthly_saving": 1675.0
       },
       {
@@ -960,7 +960,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost entertainment subscription.",
+        "action_reason": "High-cost entertainment subscription.",
         "monthly_saving": 649.0
       },
       {
@@ -1865,26 +1865,26 @@
     ]
   },
   "82860113-d36e-4729-8c1f-cda0de00f00f": {
-    "analysis_id": "667e4b3f-c0bc-4d56-ab03-0bd7bba059c7",
+    "analysis_id": "6471bee6-30bd-458e-8fb0-5caed1d213ff",
     "user_id": "82860113-d36e-4729-8c1f-cda0de00f00f",
     "summary": {
       "total_transactions_found": 42,
       "subscriptions_detected": 7,
-      "parsing_method": "Plaid Sandbox (HDFC)",
-      "bank_connected": "HDFC",
+      "parsing_method": "Plaid Sandbox (Axis)",
+      "bank_connected": "Axis",
       "date_range": {
-        "from_date": "2026-02-04",
-        "to_date": "2026-07-20"
+        "from_date": "2026-02-02",
+        "to_date": "2026-07-19"
       },
       "health_score": 64
     },
     "subscriptions": [
       {
         "id": "sub_1",
-        "merchant": "Adobe Creative Cloud",
-        "category": "Software",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness",
         "frequency": "monthly",
-        "current_amount": 1675.0,
+        "current_amount": 1250.0,
         "confidence": 0.98,
         "price_change": {
           "increased": false,
@@ -1893,33 +1893,33 @@
         },
         "history": [
           {
-            "date": "2026-02-20",
-            "amount": 1675.0
+            "date": "2026-02-19",
+            "amount": 1250.0
           },
           {
-            "date": "2026-03-20",
-            "amount": 1675.0
+            "date": "2026-03-19",
+            "amount": 1250.0
           },
           {
-            "date": "2026-04-20",
-            "amount": 1675.0
+            "date": "2026-04-19",
+            "amount": 1250.0
           },
           {
-            "date": "2026-05-20",
-            "amount": 1675.0
+            "date": "2026-05-19",
+            "amount": 1250.0
           },
           {
-            "date": "2026-06-20",
-            "amount": 1675.0
+            "date": "2026-06-19",
+            "amount": 1250.0
           },
           {
-            "date": "2026-07-20",
-            "amount": 1675.0
+            "date": "2026-07-19",
+            "amount": 1250.0
           }
         ],
-        "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost software subscription.",
-        "monthly_saving": 1675.0
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
       },
       {
         "id": "sub_2",
@@ -1935,78 +1935,36 @@
         },
         "history": [
           {
-            "date": "2026-02-19",
+            "date": "2026-02-18",
             "amount": 499.0
           },
           {
-            "date": "2026-03-19",
+            "date": "2026-03-18",
             "amount": 499.0
           },
           {
-            "date": "2026-04-19",
+            "date": "2026-04-18",
             "amount": 649.0
           },
           {
-            "date": "2026-05-19",
+            "date": "2026-05-18",
             "amount": 649.0
           },
           {
-            "date": "2026-06-19",
+            "date": "2026-06-18",
             "amount": 649.0
           },
           {
-            "date": "2026-07-19",
+            "date": "2026-07-18",
             "amount": 649.0
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost entertainment subscription.",
+        "action_reason": "High-cost entertainment subscription.",
         "monthly_saving": 649.0
       },
       {
         "id": "sub_3",
-        "merchant": "Spotify",
-        "category": "Music",
-        "frequency": "monthly",
-        "current_amount": 119.0,
-        "confidence": 0.98,
-        "price_change": {
-          "increased": false,
-          "amount_change": 0.0,
-          "percent_change": 0.0
-        },
-        "history": [
-          {
-            "date": "2026-02-18",
-            "amount": 119.0
-          },
-          {
-            "date": "2026-03-18",
-            "amount": 119.0
-          },
-          {
-            "date": "2026-04-18",
-            "amount": 119.0
-          },
-          {
-            "date": "2026-05-18",
-            "amount": 119.0
-          },
-          {
-            "date": "2026-06-18",
-            "amount": 119.0
-          },
-          {
-            "date": "2026-07-18",
-            "amount": 119.0
-          }
-        ],
-        "recommended_action": "Keep",
-        "action_reason": "Regular usage, standard pricing.",
-        "monthly_saving": 0.0
-      },
-      {
-        "id": "sub_4",
         "merchant": "Swiggy One",
         "category": "Food & Delivery",
         "frequency": "monthly",
@@ -2019,27 +1977,27 @@
         },
         "history": [
           {
-            "date": "2026-02-15",
+            "date": "2026-02-13",
             "amount": 299.0
           },
           {
-            "date": "2026-03-15",
+            "date": "2026-03-13",
             "amount": 299.0
           },
           {
-            "date": "2026-04-15",
+            "date": "2026-04-13",
             "amount": 299.0
           },
           {
-            "date": "2026-05-15",
+            "date": "2026-05-13",
             "amount": 299.0
           },
           {
-            "date": "2026-06-15",
+            "date": "2026-06-13",
             "amount": 299.0
           },
           {
-            "date": "2026-07-15",
+            "date": "2026-07-13",
             "amount": 299.0
           }
         ],
@@ -2048,11 +2006,53 @@
         "monthly_saving": 0.0
       },
       {
-        "id": "sub_5",
-        "merchant": "Cult.fit Pass",
-        "category": "Fitness",
+        "id": "sub_4",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software",
         "frequency": "monthly",
-        "current_amount": 1250.0,
+        "current_amount": 1675.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-08",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-03-08",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-04-08",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-05-08",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-06-08",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-07-08",
+            "amount": 1675.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "High-cost software subscription.",
+        "monthly_saving": 1675.0
+      },
+      {
+        "id": "sub_5",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services",
+        "frequency": "monthly",
+        "current_amount": 75.0,
         "confidence": 0.98,
         "price_change": {
           "increased": false,
@@ -2062,27 +2062,27 @@
         "history": [
           {
             "date": "2026-02-07",
-            "amount": 1250.0
+            "amount": 75.0
           },
           {
             "date": "2026-03-07",
-            "amount": 1250.0
+            "amount": 75.0
           },
           {
             "date": "2026-04-07",
-            "amount": 1250.0
+            "amount": 75.0
           },
           {
             "date": "2026-05-07",
-            "amount": 1250.0
+            "amount": 75.0
           },
           {
             "date": "2026-06-07",
-            "amount": 1250.0
+            "amount": 75.0
           },
           {
             "date": "2026-07-07",
-            "amount": 1250.0
+            "amount": 75.0
           }
         ],
         "recommended_action": "Keep",
@@ -2133,10 +2133,10 @@
       },
       {
         "id": "sub_7",
-        "merchant": "Apple iCloud",
-        "category": "Cloud Services",
+        "merchant": "Spotify",
+        "category": "Music",
         "frequency": "monthly",
-        "current_amount": 75.0,
+        "current_amount": 119.0,
         "confidence": 0.98,
         "price_change": {
           "increased": false,
@@ -2145,28 +2145,28 @@
         },
         "history": [
           {
-            "date": "2026-02-04",
-            "amount": 75.0
+            "date": "2026-02-02",
+            "amount": 119.0
           },
           {
-            "date": "2026-03-04",
-            "amount": 75.0
+            "date": "2026-03-02",
+            "amount": 119.0
           },
           {
-            "date": "2026-04-04",
-            "amount": 75.0
+            "date": "2026-04-02",
+            "amount": 119.0
           },
           {
-            "date": "2026-05-04",
-            "amount": 75.0
+            "date": "2026-05-02",
+            "amount": 119.0
           },
           {
-            "date": "2026-06-04",
-            "amount": 75.0
+            "date": "2026-06-02",
+            "amount": 119.0
           },
           {
-            "date": "2026-07-04",
-            "amount": 75.0
+            "date": "2026-07-02",
+            "amount": 119.0
           }
         ],
         "recommended_action": "Keep",
@@ -2194,6 +2194,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-07-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-07-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2201,6 +2210,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-07-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-07-16",
@@ -2230,6 +2248,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-07-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-07-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2237,6 +2264,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-07-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-07-06",
@@ -2284,6 +2320,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-07-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
         "date": "2026-07-01",
         "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
         "amount": 119.0,
@@ -2320,6 +2365,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-06-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-06-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2327,6 +2381,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-06-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-06-16",
@@ -2356,6 +2419,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-06-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-06-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2363,6 +2435,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-06-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-06-06",
@@ -2410,6 +2491,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-06-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
         "date": "2026-06-01",
         "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
         "amount": 119.0,
@@ -2446,6 +2536,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-05-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-05-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2453,6 +2552,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-05-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-05-16",
@@ -2482,6 +2590,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-05-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-05-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2489,6 +2606,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-05-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-05-06",
@@ -2536,6 +2662,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-05-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
         "date": "2026-05-01",
         "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
         "amount": 119.0,
@@ -2572,6 +2707,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-04-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-04-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2579,6 +2723,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-04-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-04-16",
@@ -2608,6 +2761,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-04-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-04-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2615,6 +2777,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-04-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-04-06",
@@ -2662,6 +2833,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-04-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
         "date": "2026-04-01",
         "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
         "amount": 119.0,
@@ -2698,6 +2878,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-03-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-03-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2705,6 +2894,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-03-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-03-16",
@@ -2734,6 +2932,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-03-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-03-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2741,6 +2948,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-03-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-03-06",
@@ -2788,6 +3004,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-03-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
         "date": "2026-03-01",
         "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
         "amount": 119.0,
@@ -2824,6 +3049,15 @@
         "category": "Entertainment"
       },
       {
+        "date": "2026-02-19",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
         "date": "2026-02-18",
         "raw_description": "UPI/SPOTIFY INDIA HDFC",
         "amount": 119.0,
@@ -2831,6 +3065,15 @@
         "source": "pdf_table",
         "merchant": "Spotify",
         "category": "Music"
+      },
+      {
+        "date": "2026-02-18",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
       },
       {
         "date": "2026-02-16",
@@ -2860,6 +3103,15 @@
         "category": "Food & Delivery"
       },
       {
+        "date": "2026-02-08",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
         "date": "2026-02-07",
         "raw_description": "CULTFIT HEALTHCARE HDFC",
         "amount": 1250.0,
@@ -2867,6 +3119,15 @@
         "source": "pdf_table",
         "merchant": "Cult.fit Pass",
         "category": "Fitness"
+      },
+      {
+        "date": "2026-02-07",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
       },
       {
         "date": "2026-02-06",
@@ -2912,6 +3173,15 @@
         "source": "pdf_table",
         "merchant": "Netflix",
         "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
       },
       {
         "date": "2026-02-01",
@@ -2987,7 +3257,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost software subscription.",
+        "action_reason": "High-cost software subscription.",
         "monthly_saving": 1675.0
       },
       {
@@ -3029,7 +3299,7 @@
           }
         ],
         "recommended_action": "Cancel",
-        "action_reason": "Unused high-cost entertainment subscription.",
+        "action_reason": "High-cost entertainment subscription.",
         "monthly_saving": 649.0
       },
       {
