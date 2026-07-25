@@ -11,10 +11,7 @@ class PaymentHistoryItem {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        'date': date,
-        'amount': amount,
-      };
+  Map<String, dynamic> toJson() => {'date': date, 'amount': amount};
 }
 
 class PriceChange {
@@ -42,7 +39,7 @@ class SubscriptionItem {
   final String merchant;
   final String category;
   final String frequency;
-  final double currentAmount;
+  final double current_amount;
   final double confidence;
   final PriceChange? priceChange;
   final List<PaymentHistoryItem> history;
@@ -55,7 +52,7 @@ class SubscriptionItem {
     required this.merchant,
     required this.category,
     required this.frequency,
-    required this.currentAmount,
+    required this.current_amount,
     required this.confidence,
     this.priceChange,
     required this.history,
@@ -70,7 +67,8 @@ class SubscriptionItem {
         .map((e) => PaymentHistoryItem.fromJson(e as Map<String, dynamic>))
         .toList();
 
-    bool isHike = priceChangeJson != null &&
+    bool isHike =
+        priceChangeJson != null &&
         (priceChangeJson['increased'] as bool? ?? false);
 
     // Derive recommendation client-side if not explicitly provided
@@ -97,7 +95,7 @@ class SubscriptionItem {
       merchant: json['merchant'] as String? ?? 'Unknown',
       category: json['category'] as String? ?? 'General',
       frequency: json['frequency'] as String? ?? 'monthly',
-      currentAmount: (json['current_amount'] as num).toDouble(),
+      current_amount: (json['current_amount'] as num).toDouble(),
       confidence: (json['confidence'] as num?)?.toDouble() ?? 0.9,
       priceChange: priceChangeJson != null
           ? PriceChange.fromJson(priceChangeJson)

@@ -50,10 +50,12 @@ class AnalysisProvider extends ChangeNotifier {
     _subscriptions = rawSubs
         .asMap()
         .entries
-        .map((entry) => SubscriptionItem.fromJson(
-              entry.value as Map<String, dynamic>,
-              entry.key,
-            ))
+        .map(
+          (entry) => SubscriptionItem.fromJson(
+            entry.value as Map<String, dynamic>,
+            entry.key,
+          ),
+        )
         .toList();
 
     // Default select all cancel/downgrade items in simulator
@@ -89,10 +91,13 @@ class AnalysisProvider extends ChangeNotifier {
   // Derived Metrics
   int get baseHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    double totalSpend = _subscriptions.fold(0, (sum, s) => sum + s.currentAmount);
+    double totalSpend = _subscriptions.fold(
+      0,
+      (sum, s) => sum + s.current_amount,
+    );
     double leakage = _subscriptions
         .where((s) => s.recommendedAction != 'Keep')
-        .fold(0, (sum, s) => sum + s.currentAmount);
+        .fold(0, (sum, s) => sum + s.current_amount);
 
     if (totalSpend == 0) return 100;
     double ratio = leakage / totalSpend;
@@ -102,12 +107,17 @@ class AnalysisProvider extends ChangeNotifier {
 
   int get simulatedHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    double totalSpend = _subscriptions.fold(0, (sum, s) => sum + s.currentAmount);
+    double totalSpend = _subscriptions.fold(
+      0,
+      (sum, s) => sum + s.current_amount,
+    );
     double remainingLeakage = _subscriptions
-        .where((s) =>
-            s.recommendedAction != 'Keep' &&
-            !_simulatedCancelledIds.contains(s.id))
-        .fold(0, (sum, s) => sum + s.currentAmount);
+        .where(
+          (s) =>
+              s.recommendedAction != 'Keep' &&
+              !_simulatedCancelledIds.contains(s.id),
+        )
+        .fold(0, (sum, s) => sum + s.current_amount);
 
     if (totalSpend == 0) return 100;
     double ratio = remainingLeakage / totalSpend;
@@ -117,7 +127,7 @@ class AnalysisProvider extends ChangeNotifier {
 
   double get monthlyLeakage => _subscriptions
       .where((s) => s.recommendedAction != 'Keep')
-      .fold(0, (sum, s) => sum + s.currentAmount);
+      .fold(0, (sum, s) => sum + s.current_amount);
 
   double get potentialMonthlySavings => _subscriptions
       .where((s) => s.recommendedAction != 'Keep')

@@ -39,8 +39,10 @@ class SubscriptionsScreen extends StatelessWidget {
                     style: AppTypography.headlineLarge(color: AppColors.ink),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.paperDim,
                       borderRadius: BorderRadius.circular(20),
@@ -161,8 +163,9 @@ class _SubscriptionCardState extends State<SubscriptionCard> {
                         const SizedBox(height: 4),
                         Text(
                           '${sub.category} · ${sub.frequency}',
-                          style:
-                              AppTypography.bodySmall(color: AppColors.slate),
+                          style: AppTypography.bodySmall(
+                            color: AppColors.slate,
+                          ),
                         ),
                       ],
                     ),
@@ -173,7 +176,7 @@ class _SubscriptionCardState extends State<SubscriptionCard> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       MoneyText(
-                        amount: sub.currentAmount,
+                        amount: sub.current_amount,
                         size: MoneySize.medium,
                         color: AppColors.ink,
                       ),
@@ -182,8 +185,9 @@ class _SubscriptionCardState extends State<SubscriptionCard> {
                         children: [
                           Text(
                             'per ${sub.frequency == "monthly" ? "mo" : "yr"}',
-                            style:
-                                AppTypography.bodySmall(color: AppColors.slate),
+                            style: AppTypography.bodySmall(
+                              color: AppColors.slate,
+                            ),
                           ),
                           const SizedBox(width: 4),
                           Icon(

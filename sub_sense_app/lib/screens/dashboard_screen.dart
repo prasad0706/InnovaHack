@@ -32,8 +32,11 @@ class DashboardScreen extends StatelessWidget {
     final hikedSubs = provider.subscriptions
         .where((s) => s.priceChange?.increased == true)
         .toList();
-    hikedSubs.sort((a, b) => (b.priceChange?.percentChange ?? 0)
-        .compareTo(a.priceChange?.percentChange ?? 0));
+    hikedSubs.sort(
+      (a, b) => (b.priceChange?.percentChange ?? 0).compareTo(
+        a.priceChange?.percentChange ?? 0,
+      ),
+    );
     final topHike = hikedSubs.isNotEmpty ? hikedSubs.first : null;
 
     // Duplicate services
@@ -45,8 +48,10 @@ class DashboardScreen extends StatelessWidget {
     final cancelSubs = provider.subscriptions
         .where((s) => s.recommendedAction == 'Cancel')
         .toList();
-    final cancelSavings =
-        cancelSubs.fold(0.0, (sum, s) => sum + s.currentAmount);
+    final cancelSavings = cancelSubs.fold(
+      0.0,
+      (sum, s) => sum + s.current_amount,
+    );
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
@@ -73,7 +78,9 @@ class DashboardScreen extends StatelessWidget {
                     children: [
                       Text(
                         headline,
-                        style: AppTypography.headlineLarge(color: AppColors.ink),
+                        style: AppTypography.headlineLarge(
+                          color: AppColors.ink,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -167,9 +174,12 @@ class DashboardScreen extends StatelessWidget {
                     Expanded(
                       flex: stackCards ? 0 : 1,
                       child: CardContainer(
-                        backgroundColor: AppColors.coral.withValues(alpha: 0.08),
+                        backgroundColor: AppColors.coral.withValues(
+                          alpha: 0.08,
+                        ),
                         borderColor: AppColors.coral.withValues(alpha: 0.3),
-                        onTap: () => provider.setActiveTab(2), // Subscriptions tab
+                        onTap: () =>
+                            provider.setActiveTab(2), // Subscriptions tab
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -209,15 +219,21 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (stackCards) const SizedBox(height: 16) else const SizedBox(width: 16),
+                    if (stackCards)
+                      const SizedBox(height: 16)
+                    else
+                      const SizedBox(width: 16),
 
                     // Flag Card 2: Duplicate Services
                     Expanded(
                       flex: stackCards ? 0 : 1,
                       child: CardContainer(
-                        backgroundColor: AppColors.amber.withValues(alpha: 0.08),
+                        backgroundColor: AppColors.amber.withValues(
+                          alpha: 0.08,
+                        ),
                         borderColor: AppColors.amber.withValues(alpha: 0.3),
-                        onTap: () => provider.setActiveTab(2), // Subscriptions tab
+                        onTap: () =>
+                            provider.setActiveTab(2), // Subscriptions tab
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -247,7 +263,9 @@ class DashboardScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               duplicateSubs.isNotEmpty
-                                  ? duplicateSubs.map((s) => s.merchant).join(', ')
+                                  ? duplicateSubs
+                                        .map((s) => s.merchant)
+                                        .join(', ')
                                   : 'YouTube Premium & Netflix',
                               style: AppTypography.bodySmall(
                                 color: AppColors.slate,
@@ -257,7 +275,10 @@ class DashboardScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    if (stackCards) const SizedBox(height: 16) else const SizedBox(width: 16),
+                    if (stackCards)
+                      const SizedBox(height: 16)
+                    else
+                      const SizedBox(width: 16),
 
                     // Flag Card 3: Recommended to Cancel
                     Expanded(
@@ -320,7 +341,9 @@ class DashboardScreen extends StatelessWidget {
                     ),
                   ];
 
-                  return stackCards ? Column(children: cards) : Row(children: cards);
+                  return stackCards
+                      ? Column(children: cards)
+                      : Row(children: cards);
                 },
               ),
 
@@ -361,7 +384,8 @@ class DashboardScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () => provider.setActiveTab(2), // Subscriptions Tab
+                    onPressed: () =>
+                        provider.setActiveTab(2), // Subscriptions Tab
                     icon: const Icon(Icons.list_alt_rounded, size: 18),
                     label: Text(
                       'View all subscriptions',
@@ -391,9 +415,9 @@ class _StatPair extends StatelessWidget {
       children: [
         Text(
           label.toUpperCase(),
-          style: AppTypography.eyebrow(color: AppColors.slate).copyWith(
-            fontSize: 10,
-          ),
+          style: AppTypography.eyebrow(
+            color: AppColors.slate,
+          ).copyWith(fontSize: 10),
         ),
         const SizedBox(height: 4),
         child,

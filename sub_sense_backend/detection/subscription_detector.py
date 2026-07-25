@@ -67,7 +67,7 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
             action = "Downgrade"
             reason = f"Price increased by {price_change['percent_change']}% recently (+₹{price_change['amount_change']})."
             monthly_saving = price_change["amount_change"]
-        elif category in ("Entertainment", "Software") and currentAmount > 500:
+        elif category in ("Entertainment", "Software") and current_amount > 500:
             action = "Cancel"
             reason = f"Unused high-cost {category.lower()} subscription."
             monthly_saving = current_amount
