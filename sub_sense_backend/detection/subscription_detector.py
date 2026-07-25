@@ -89,7 +89,7 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
             monthly_saving = price_change["amount_change"]
         elif category in ("Entertainment", "Software") and current_amount > 500:
             action = "Cancel"
-            reason = f"Unused high-cost {category.lower()} subscription."
+            reason = f"High-cost {category.lower()} subscription."
             monthly_saving = current_amount
         elif category == "Duplicate":
             action = "Cancel"
