@@ -47,6 +47,16 @@ class PlaidConnectRequest(BaseModel):
 class DisconnectBankRequest(BaseModel):
     user_id: Optional[str] = None
 
+@app.get("/")
+@app.head("/")
+def root():
+    return {
+        "status": "ok",
+        "message": "SubSense API Backend is live and operational!",
+        "version": "1.4.0",
+        "docs": "/docs",
+    }
+
 @app.get("/api/health")
 def health_check():
     return {
