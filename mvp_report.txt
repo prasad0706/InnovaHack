@@ -1,0 +1,587 @@
+SubSense
+Bank Statement Upload & Subscription Detection
+MVP Implementation Report — Feature 1
+InnovaHack — Financial Health / Subscription Leak Detection Prepared for: Vedant · VESIT
+July 2026
+Scope of this documentThis report covers ONE end-to-end vertical slice of the MVP: uploading a bank statement (PDF, including password-protected), parsing it, cleaning it, detecting recurring subscriptions, and flagging price increases. SMS/CSV ingestion, the AI insight layer, and the full dashboard are referenced but not detailed here — build this slice first, prove it end-to-end, then extend.Scope of this documentThis report covers ONE end-to-end vertical slice of the MVP: uploading a bank statement (PDF, including password-protected), parsing it, cleaning it, detecting recurring subscriptions, and flagging price increases. SMS/CSV ingestion, the AI insight layer, and the full dashboard are referenced but not detailed here — build this slice first, prove it end-to-end, then extend.
+Scope of this document
+This report covers ONE end-to-end vertical slice of the MVP: uploading a bank statement (PDF, including password-protected), parsing it, cleaning it, detecting recurring subscriptions, and flagging price increases. SMS/CSV ingestion, the AI insight layer, and the full dashboard are referenced but not detailed here — build this slice first, prove it end-to-end, then extend.
+Scope of this document
+This report covers ONE end-to-end vertical slice of the MVP: uploading a bank statement (PDF, including password-protected), parsing it, cleaning it, detecting recurring subscriptions, and flagging price increases. SMS/CSV ingestion, the AI insight layer, and the full dashboard are referenced but not detailed here — build this slice first, prove it end-to-end, then extend.
+Contents
+Why this slice first
+System overview & data flow
+Tech stack & justification
+Step-by-step build plan (hour-by-hour)
+PDF ingestion — detailed design
+Password-protected PDF handling
+Table extraction strategy (generic parser)
+Regex fallback parser
+Transaction cleaning & normalization
+Merchant normalization
+Subscription detection algorithm
+Price increase detection
+API contract
+Data schema
+Error handling & edge cases
+Testing plan & sample data
+Risks specific to your choices
+What to explicitly cut if time runs out
+Why This Slice First
+Everything downstream — Leak Score, Savings Simulator, Action Center, AI Insights — depends on getting clean, structured transactions out of a bank statement. If this layer is shaky, every other feature inherits the bug. Build and demo-proof this slice before touching UI polish elsewhere.
+The slice you're building:
+PDF Upload (+ password)→ Text/Table Extraction→ Row Parsing (table-based OR regex fallback)→ Transaction Cleaning→ Merchant Normalization→ Recurring Subscription Detection→ Price Increase Detection→ JSON response to frontendPDF Upload (+ password)→ Text/Table Extraction→ Row Parsing (table-based OR regex fallback)→ Transaction Cleaning→ Merchant Normalization→ Recurring Subscription Detection→ Price Increase Detection→ JSON response to frontend
+PDF Upload (+ password)
+→ Text/Table Extraction
+→ Row Parsing (table-based OR regex fallback)
+→ Transaction Cleaning
+→ Merchant Normalization
+→ Recurring Subscription Detection
+→ Price Increase Detection
+→ JSON response to frontend
+PDF Upload (+ password)
+→ Text/Table Extraction
+→ Row Parsing (table-based OR regex fallback)
+→ Transaction Cleaning
+→ Merchant Normalization
+→ Recurring Subscription Detection
+→ Price Increase Detection
+→ JSON response to frontend
+This is a backend-heavy slice. The frontend need only be: an upload form with an optional password field, a loading state, and a results view (subscriptions list + flags). That's it for now.
+System Overview & Data Flow
+High-level flow
+┌─────────────┐POST /upload┌───────────────────┐│ Frontend│ ───────────────▶ │FastAPI Backend ││ (Upload UI) │└─────────────┘▲│ JSON: subscriptions[]│ + flags + summary│││ 1. Save temp file ││ 2. Decrypt (if pw)││ 3. Extract tables ││ 4. Fallback: regex│└──────────────────────────│ 5. Clean rows││ 6. Normalize││ 7. Detect recurring││ 8. Detect price ↑ │└───────────────────┘┌─────────────┐POST /upload┌───────────────────┐│ Frontend│ ───────────────▶ │FastAPI Backend ││ (Upload UI) │└─────────────┘▲│ JSON: subscriptions[]│ + flags + summary│││ 1. Save temp file ││ 2. Decrypt (if pw)││ 3. Extract tables ││ 4. Fallback: regex│└──────────────────────────│ 5. Clean rows││ 6. Normalize││ 7. Detect recurring││ 8. Detect price ↑ │└───────────────────┘
+┌─────────────┐POST /upload┌───────────────────┐
+│ Frontend│ ───────────────▶ │FastAPI Backend │
+│ (Upload UI) │
+└─────────────┘
+▲
+│ JSON: subscriptions[]
+│ + flags + summary
+│
+│
+│ 1. Save temp file │
+│ 2. Decrypt (if pw)│
+│ 3. Extract tables │
+│ 4. Fallback: regex│
+└──────────────────────────│ 5. Clean rows│
+│ 6. Normalize│
+│ 7. Detect recurring│
+│ 8. Detect price ↑ │
+└───────────────────┘
+┌─────────────┐POST /upload┌───────────────────┐
+│ Frontend│ ───────────────▶ │FastAPI Backend │
+│ (Upload UI) │
+└─────────────┘
+▲
+│ JSON: subscriptions[]
+│ + flags + summary
+│
+│
+│ 1. Save temp file │
+│ 2. Decrypt (if pw)│
+│ 3. Extract tables │
+│ 4. Fallback: regex│
+└──────────────────────────│ 5. Clean rows│
+│ 6. Normalize│
+│ 7. Detect recurring│
+│ 8. Detect price ↑ │
+└───────────────────┘
+Module boundaries
+Keep every module a pure function: input in, structured output out, no hidden state. This matters a lot for a hackathon
+— when a demo run produces a wrong number at 2 AM, you need to bisect which of 6 stages broke it. If everything is one giant script, you can't.
+Tech Stack & Justification
+Layer
+Choice
+Why
+API framework
+FastAPI (Python 3.11+)
+Async, auto OpenAPI docs (useful for judges), fast to write, great for file uploads
+PDF text/table extraction
+pdfplumber
+Best balance of accuracy and control for bank statement tables; per-page, per-table access
+PDF decryption
+pikepdf or pypdf (PdfReader.decrypt)
+Both handle standard PDF encryption (RC4/AES); pikepdf is more robust for malformed PDFs
+Layer
+Choice
+Why
+Fallback text parsing
+Python re (regex) on pdfplumber's extract_text()
+When extract_table() returns nothing/garbage due to no visible gridlines
+Data handling
+pandas
+Row/column manipulation, groupby for recurring detection, date arithmetic
+Fuzzy merchant matching
+rapidfuzz
+Fast, MIT-licensed, better than fuzzywuzzy for this use case
+Validation
+pydantic (built into FastAPI)
+Enforces the normalized transaction schema at the API boundary
+On the 'generic parser' decision
+You chose the harder, more impressive path. Be deliberate about what 'generic' means: it should mean 'doesn't hardcode one bank's exact column names,' not 'handles every possible PDF layout ever produced.' Build it generic within the shape of a typical tabular bank statement (date, description, debit, credit, balance — in some order). A truly universal parser (scanned images, exotic layouts) is out of scope for 24 hours — see Section 17.
+Step-by-Step Build Plan (Hour-by-Hour)
+This assumes a team splitting backend/frontend in parallel. Adjust to your team size.
+Hours
+Milestone
+Deliverable
+0–1
+Setup
+FastAPI skeleton, /upload endpoint accepting multipart file + optional password field, returns dummy JSON
+1–3
+PDF text extraction working
+pdfplumber reads an unprotected PDF, prints raw text + raw tables to console
+3–4
+Password-protected PDF support
+Decrypt flow works on at least 1 real protected statement
+4–7
+Table-based row parser
+Structured rows (date, description, amount, type) from a clean tabular PDF
+7–9
+Regex fallback parser
+Same output schema when extract_table() fails, tested on a messier PDF
+9–11
+Cleaning + merchant normalization
+Raw descriptions mapped to clean merchant names via dictionary + fuzzy match
+11–13
+Recurring subscription detection
+Groups transactions into subscriptions with frequency + confidence
+13–14
+Price increase detection
+Flags subscriptions where latest amount > baseline
+14–15
+API contract finalized
+/upload returns the full JSON shape frontend needs (Section 13)
+15–18
+Frontend integration
+Upload form + password field + loading state + results rendered as cards
+18–20
+Testing with real + edge-case PDFs
+Run all 4 sample PDFs from Section 16, fix breakages
+20–22
+Polish, error states, demo script
+Graceful failure messages, rehearse the exact demo flow
+22–24
+Buffer
+Fix whatever breaks last-minute; do NOT add features here
+PDF Ingestion — Detailed Design
+Endpoint shape
+POST /api/uploadContent-Type: multipart/form-datafields:file: <PDF binary>password: <string, optional>source_hint: <string, optional> e.g. "hdfc" | "sbi" | "auto"POST /api/uploadContent-Type: multipart/form-datafields:file: <PDF binary>password: <string, optional>source_hint: <string, optional> e.g. "hdfc" | "sbi" | "auto"
+POST /api/upload
+Content-Type: multipart/form-data
+fields:
+file: <PDF binary>
+password: <string, optional>
+source_hint: <string, optional> e.g. "hdfc" | "sbi" | "auto"
+POST /api/upload
+Content-Type: multipart/form-data
+fields:
+file: <PDF binary>
+password: <string, optional>
+source_hint: <string, optional> e.g. "hdfc" | "sbi" | "auto"
+Core extraction code path
+import pdfplumber import pikepdf import iodef load_pdf(file_bytes: bytes, password: str | None): if password:# Decrypt first, hand pdfplumber a clean streamwith pikepdf.open(io.BytesIO(file_bytes), password=password) as pdf: buf = io.BytesIO()pdf.save(buf) buf.seek(0)return pdfplumber.open(buf)return pdfplumber.open(io.BytesIO(file_bytes))import pdfplumber import pikepdf import iodef load_pdf(file_bytes: bytes, password: str | None): if password:# Decrypt first, hand pdfplumber a clean streamwith pikepdf.open(io.BytesIO(file_bytes), password=password) as pdf: buf = io.BytesIO()pdf.save(buf) buf.seek(0)return pdfplumber.open(buf)return pdfplumber.open(io.BytesIO(file_bytes))
+import pdfplumber import pikepdf import io
+def load_pdf(file_bytes: bytes, password: str | None): if password:
+# Decrypt first, hand pdfplumber a clean stream
+with pikepdf.open(io.BytesIO(file_bytes), password=password) as pdf: buf = io.BytesIO()
+pdf.save(buf) buf.seek(0)
+return pdfplumber.open(buf)
+return pdfplumber.open(io.BytesIO(file_bytes))
+import pdfplumber import pikepdf import io
+def load_pdf(file_bytes: bytes, password: str | None): if password:
+# Decrypt first, hand pdfplumber a clean stream
+with pikepdf.open(io.BytesIO(file_bytes), password=password) as pdf: buf = io.BytesIO()
+pdf.save(buf) buf.seek(0)
+return pdfplumber.open(buf)
+return pdfplumber.open(io.BytesIO(file_bytes))
+Try to open without a password first. If pdfplumber/pikepdf raises a password-required error, return a 422 telling the frontend to prompt for one — don't force the user to guess upfront whether their file is protected.
+Password-Protected PDF Handling
+Indian bank statements are commonly protected with a password derived from the account holder's own details — most often date of birth (DDMMYYYY) or the first few characters of name + DOB, sometimes PAN. Since you chose the user-types-it-in-the-UI approach, this is straightforward but needs clear error handling.
+Flow
+User uploads PDF.
+Backend attempts to open it unprotected.
+If it raises a decryption/password error, respond with HTTP 422 and a specific error code (e.g. PDF_PASSWORD_REQUIRED).
+Frontend shows a password input, resubmits the same file with the password field populated.
+Backend attempts pikepdf.open(..., password=...). Wrong password → 401 with PDF_PASSWORD_INCORRECT, distinct from step 3's error, so the UI can show 'wrong password' vs 'this file needs a password.'
+Do not auto-guess passwordsAuto-trying DOB/PAN patterns without the user's explicit input means guessing personal identifiers, which is a bad look for a fintech-adjacent hackathon project even as a demo — and you already chose the manual-entry path, which is the right call. Don't be tempted back into 'smart' auto-detection.Do not auto-guess passwordsAuto-trying DOB/PAN patterns without the user's explicit input means guessing personal identifiers, which is a bad look for a fintech-adjacent hackathon project even as a demo — and you already chose the manual-entry path, which is the right call. Don't be tempted back into 'smart' auto-detection.
+Do not auto-guess passwords
+Auto-trying DOB/PAN patterns without the user's explicit input means guessing personal identifiers, which is a bad look for a fintech-adjacent hackathon project even as a demo — and you already chose the manual-entry path, which is the right call. Don't be tempted back into 'smart' auto-detection.
+Do not auto-guess passwords
+Auto-trying DOB/PAN patterns without the user's explicit input means guessing personal identifiers, which is a bad look for a fintech-adjacent hackathon project even as a demo — and you already chose the manual-entry path, which is the right call. Don't be tempted back into 'smart' auto-detection.
+Table Extraction Strategy (Generic Parser)
+This is the highest-risk technical component you're building, precisely because you opted for generic-over-specific. Treat it as a two-tier system, not a single algorithm.
+Tier 1 — Structured table extraction
+with load_pdf(file_bytes, password) as pdf: all_rows = []for page in pdf.pages:tables = page.extract_tables({ "vertical_strategy": "lines_strict", "horizontal_strategy": "lines_strict",})if not tables:tables = page.extract_tables({ "vertical_strategy": "text", "horizontal_strategy": "text",})for table in tables: all_rows.extend(table)with load_pdf(file_bytes, password) as pdf: all_rows = []for page in pdf.pages:tables = page.extract_tables({ "vertical_strategy": "lines_strict", "horizontal_strategy": "lines_strict",})if not tables:tables = page.extract_tables({ "vertical_strategy": "text", "horizontal_strategy": "text",})for table in tables: all_rows.extend(table)
+with load_pdf(file_bytes, password) as pdf: all_rows = []
+for page in pdf.pages:
+tables = page.extract_tables({ "vertical_strategy": "lines_strict", "horizontal_strategy": "lines_strict",
+})
+if not tables:
+tables = page.extract_tables({ "vertical_strategy": "text", "horizontal_strategy": "text",
+})
+for table in tables: all_rows.extend(table)
+with load_pdf(file_bytes, password) as pdf: all_rows = []
+for page in pdf.pages:
+tables = page.extract_tables({ "vertical_strategy": "lines_strict", "horizontal_strategy": "lines_strict",
+})
+if not tables:
+tables = page.extract_tables({ "vertical_strategy": "text", "horizontal_strategy": "text",
+})
+for table in tables: all_rows.extend(table)
+Try the strict line-based strategy first (works when the PDF has visible gridlines — most bank statements do). Fall back to the text-based strategy (works when columns are aligned by whitespace, no visible lines) on the same page before giving up on that page.
+Column identification (the generic part)
+Different banks label columns differently. Instead of hardcoding 'Debit'/'Credit'/'Withdrawal', use a header-matching dictionary with fuzzy matching:
+COLUMN_ALIASES = {"date":["date", "txn date", "value date", "transaction date"], "description": ["narration", "description", "particulars", "details", "remarks"],"debit":"credit":"amount": "balance":["debit", "withdrawal", "dr", "debit amount"],["credit", "deposit", "cr", "credit amount"],["amount"],# some banks use one amount col + a type col["balance", "closing balance", "running balance"],}def match_column(header_cell: str) -> str | None: from rapidfuzz import processheader_cell = header_cell.lower().strip()for canonical, aliases in COLUMN_ALIASES.items():match, score, _ = process.extractOne(header_cell, aliases) if score > 80:return canonical return NoneCOLUMN_ALIASES = {"date":["date", "txn date", "value date", "transaction date"], "description": ["narration", "description", "particulars", "details", "remarks"],"debit":"credit":"amount": "balance":["debit", "withdrawal", "dr", "debit amount"],["credit", "deposit", "cr", "credit amount"],["amount"],# some banks use one amount col + a type col["balance", "closing balance", "running balance"],}def match_column(header_cell: str) -> str | None: from rapidfuzz import processheader_cell = header_cell.lower().strip()for canonical, aliases in COLUMN_ALIASES.items():match, score, _ = process.extractOne(header_cell, aliases) if score > 80:return canonical return None
+COLUMN_ALIASES = {
+"date":["date", "txn date", "value date", "transaction date"], "description": ["narration", "description", "particulars", "details", "remarks"],
+"debit":
+"credit":
+"amount": "balance":
+["debit", "withdrawal", "dr", "debit amount"],
+["credit", "deposit", "cr", "credit amount"],
+["amount"],
+# some banks use one amount col + a type col
+["balance", "closing balance", "running balance"],
+}
+def match_column(header_cell: str) -> str | None: from rapidfuzz import process
+header_cell = header_cell.lower().strip()
+for canonical, aliases in COLUMN_ALIASES.items():
+match, score, _ = process.extractOne(header_cell, aliases) if score > 80:
+return canonical return None
+COLUMN_ALIASES = {
+"date":["date", "txn date", "value date", "transaction date"], "description": ["narration", "description", "particulars", "details", "remarks"],
+"debit":
+"credit":
+"amount": "balance":
+["debit", "withdrawal", "dr", "debit amount"],
+["credit", "deposit", "cr", "credit amount"],
+["amount"],
+# some banks use one amount col + a type col
+["balance", "closing balance", "running balance"],
+}
+def match_column(header_cell: str) -> str | None: from rapidfuzz import process
+header_cell = header_cell.lower().strip()
+for canonical, aliases in COLUMN_ALIASES.items():
+match, score, _ = process.extractOne(header_cell, aliases) if score > 80:
+return canonical return None
+Run this against the first row of each extracted table to build a column-index map, then parse every subsequent row against that map. This is what makes the parser 'generic' rather than bank-specific — you're matching on semantic column meaning, not exact bank formatting.
+Regex Fallback Parser
+When both table strategies return nothing usable (empty tables, single giant merged cell, or a scanned/no-gridline layout that pdfplumber can't segment), fall back to line-by-line regex parsing on raw extracted text.
+import reTXN_LINE_PATTERN = re.compile( r"(?P<date>\d{2}[-/]\d{2}[-/]\d{2,4})\s+" r"(?P<description>.+?)\s+" r"(?P<amount>[\d,]+\.\d{2})\s*" r"(?P<type>DR|CR)?\s*$")def parse_line(line: str):m = TXN_LINE_PATTERN.search(line) if not m:return None return {"date": m.group("date"),"description": m.group("description").strip(), "amount": float(m.group("amount").replace(",", "")),"type": "debit" if m.group("type") == "DR" else "credit",}def fallback_parse(raw_text: str): results = []for line in raw_text.split("\n"): row = parse_line(line)if row:results.append(row) return resultsimport reTXN_LINE_PATTERN = re.compile( r"(?P<date>\d{2}[-/]\d{2}[-/]\d{2,4})\s+" r"(?P<description>.+?)\s+" r"(?P<amount>[\d,]+\.\d{2})\s*" r"(?P<type>DR|CR)?\s*$")def parse_line(line: str):m = TXN_LINE_PATTERN.search(line) if not m:return None return {"date": m.group("date"),"description": m.group("description").strip(), "amount": float(m.group("amount").replace(",", "")),"type": "debit" if m.group("type") == "DR" else "credit",}def fallback_parse(raw_text: str): results = []for line in raw_text.split("\n"): row = parse_line(line)if row:results.append(row) return results
+import re
+TXN_LINE_PATTERN = re.compile( r"(?P<date>\d{2}[-/]\d{2}[-/]\d{2,4})\s+" r"(?P<description>.+?)\s+" r"(?P<amount>[\d,]+\.\d{2})\s*" r"(?P<type>DR|CR)?\s*$"
+)
+def parse_line(line: str):
+m = TXN_LINE_PATTERN.search(line) if not m:
+return None return {
+"date": m.group("date"),
+"description": m.group("description").strip(), "amount": float(m.group("amount").replace(",", "")),
+"type": "debit" if m.group("type") == "DR" else "credit",
+}
+def fallback_parse(raw_text: str): results = []
+for line in raw_text.split("\n"): row = parse_line(line)
+if row:
+results.append(row) return results
+import re
+TXN_LINE_PATTERN = re.compile( r"(?P<date>\d{2}[-/]\d{2}[-/]\d{2,4})\s+" r"(?P<description>.+?)\s+" r"(?P<amount>[\d,]+\.\d{2})\s*" r"(?P<type>DR|CR)?\s*$"
+)
+def parse_line(line: str):
+m = TXN_LINE_PATTERN.search(line) if not m:
+return None return {
+"date": m.group("date"),
+"description": m.group("description").strip(), "amount": float(m.group("amount").replace(",", "")),
+"type": "debit" if m.group("type") == "DR" else "credit",
+}
+def fallback_parse(raw_text: str): results = []
+for line in raw_text.split("\n"): row = parse_line(line)
+if row:
+results.append(row) return results
+Be honest about this fallback's limitsRegex line-parsing is brittle against multi-line descriptions and inconsistent date formats. Don't over-invest here — its job is to rescue a demo from total failure on an unusual PDF, not to be equally accurate as Tier 1. If fallback parsing yields fewer than ~3 transactions, treat it as a parse failure and return a clear error rather than silently showing a near-empty result.Be honest about this fallback's limitsRegex line-parsing is brittle against multi-line descriptions and inconsistent date formats. Don't over-invest here — its job is to rescue a demo from total failure on an unusual PDF, not to be equally accurate as Tier 1. If fallback parsing yields fewer than ~3 transactions, treat it as a parse failure and return a clear error rather than silently showing a near-empty result.
+Be honest about this fallback's limits
+Regex line-parsing is brittle against multi-line descriptions and inconsistent date formats. Don't over-invest here — its job is to rescue a demo from total failure on an unusual PDF, not to be equally accurate as Tier 1. If fallback parsing yields fewer than ~3 transactions, treat it as a parse failure and return a clear error rather than silently showing a near-empty result.
+Be honest about this fallback's limits
+Regex line-parsing is brittle against multi-line descriptions and inconsistent date formats. Don't over-invest here — its job is to rescue a demo from total failure on an unusual PDF, not to be equally accurate as Tier 1. If fallback parsing yields fewer than ~3 transactions, treat it as a parse failure and return a clear error rather than silently showing a near-empty result.
+Transaction Cleaning & Normalization
+Whatever tier produced the rows, funnel everything into one normalized schema immediately (see Section 14). Cleaning steps, in order:
+Parse dates into ISO format (handle DD/MM/YY, DD-MM-YYYY, DD Mon YYYY — build a small list of formats to try with dateutil.parser as a last resort).
+Parse amounts: strip commas/currency symbols, convert to float, keep debit/credit as a signed or typed field (not both — pick one, be consistent).
+Drop non-subscription-relevant rows: salary credits, interest credits, ATM withdrawals, cash deposits, NEFT/RTGS credits, refunds. Keep only debit-type transactions that look like recurring payments (UPI, card, auto-debit, standing instruction).
+Drop duplicate rows (same date + amount + description appearing twice due to table extraction overlap across page boundaries — a real pdfplumber gotcha).
+Merchant Normalization
+Raw descriptions look like UPI/12345/NETFLIX.COM/BANGALORE or GOOGLE *YOUTUBEPREM. Normalize in two passes:
+Pass 1 — strip noise
+import redef strip_noise(desc: str) -> str:desc = re.sub(r"UPI[/\-]?\d+", "", desc, flags=re.I)desc = re.sub(r"\b(PVT|LTD|INDIA|IN|COM)\b", "", desc, flags=re.I) desc = re.sub(r"[/\-]?\d{6,}", "", desc)# long reference numbers desc = re.sub(r"\s+", " ", desc).strip()return descimport redef strip_noise(desc: str) -> str:desc = re.sub(r"UPI[/\-]?\d+", "", desc, flags=re.I)desc = re.sub(r"\b(PVT|LTD|INDIA|IN|COM)\b", "", desc, flags=re.I) desc = re.sub(r"[/\-]?\d{6,}", "", desc)# long reference numbers desc = re.sub(r"\s+", " ", desc).strip()return desc
+import re
+def strip_noise(desc: str) -> str:
+desc = re.sub(r"UPI[/\-]?\d+", "", desc, flags=re.I)
+desc = re.sub(r"\b(PVT|LTD|INDIA|IN|COM)\b", "", desc, flags=re.I) desc = re.sub(r"[/\-]?\d{6,}", "", desc)# long reference numbers desc = re.sub(r"\s+", " ", desc).strip()
+return desc
+import re
+def strip_noise(desc: str) -> str:
+desc = re.sub(r"UPI[/\-]?\d+", "", desc, flags=re.I)
+desc = re.sub(r"\b(PVT|LTD|INDIA|IN|COM)\b", "", desc, flags=re.I) desc = re.sub(r"[/\-]?\d{6,}", "", desc)# long reference numbers desc = re.sub(r"\s+", " ", desc).strip()
+return desc
+Pass 2 — dictionary + fuzzy match
+Maintain merchants.json with ~100 known merchant name variants mapped to a canonical name and category (this is the file referenced in the ChatGPT plan's knowledge_base/ folder). Use rapidfuzz to match cleaned descriptions against known variants at a threshold (~85), and fall back to Title Case of the cleaned string if nothing matches — better an unmatched-but-readable name than a silent drop.
+{"netflix": {"canonical": "Netflix", "category": "Entertainment"}, "netflix.com": {"canonical": "Netflix", "category": "Entertainment"}, "spotify": {"canonical": "Spotify", "category": "Music"},"google youtubeprem": {"canonical": "YouTube Premium", "category": "Music"}, "adobe": {"canonical": "Adobe Creative Cloud", "category": "Software"}}{"netflix": {"canonical": "Netflix", "category": "Entertainment"}, "netflix.com": {"canonical": "Netflix", "category": "Entertainment"}, "spotify": {"canonical": "Spotify", "category": "Music"},"google youtubeprem": {"canonical": "YouTube Premium", "category": "Music"}, "adobe": {"canonical": "Adobe Creative Cloud", "category": "Software"}}
+{
+"netflix": {"canonical": "Netflix", "category": "Entertainment"}, "netflix.com": {"canonical": "Netflix", "category": "Entertainment"}, "spotify": {"canonical": "Spotify", "category": "Music"},
+"google youtubeprem": {"canonical": "YouTube Premium", "category": "Music"}, "adobe": {"canonical": "Adobe Creative Cloud", "category": "Software"}
+}
+{
+"netflix": {"canonical": "Netflix", "category": "Entertainment"}, "netflix.com": {"canonical": "Netflix", "category": "Entertainment"}, "spotify": {"canonical": "Spotify", "category": "Music"},
+"google youtubeprem": {"canonical": "YouTube Premium", "category": "Music"}, "adobe": {"canonical": "Adobe Creative Cloud", "category": "Software"}
+}
+Subscription Detection Algorithm
+Purely rule-based, as agreed — no ML. Group cleaned transactions by canonical merchant name, then check for recurrence:
+from collections import defaultdict from datetime import datetimedef detect_subscriptions(transactions): grouped = defaultdict(list)for t in transactions: grouped[t["merchant"]].append(t)subscriptions = []for merchant, txns in grouped.items(): txns.sort(key=lambda t: t["date"]) if len(txns) < 2:continue # can't confirm recurrence from 1 txngaps = [(datetime.fromisoformat(txns[i+1]["date"]) - datetime.fromisoformat(txns[i]["date"])).daysfor i in range(len(txns) - 1)]avg_gap = sum(gaps) / len(gaps)if 26 <= avg_gap <= 34:from collections import defaultdict from datetime import datetimedef detect_subscriptions(transactions): grouped = defaultdict(list)for t in transactions: grouped[t["merchant"]].append(t)subscriptions = []for merchant, txns in grouped.items(): txns.sort(key=lambda t: t["date"]) if len(txns) < 2:continue # can't confirm recurrence from 1 txngaps = [(datetime.fromisoformat(txns[i+1]["date"]) - datetime.fromisoformat(txns[i]["date"])).daysfor i in range(len(txns) - 1)]avg_gap = sum(gaps) / len(gaps)if 26 <= avg_gap <= 34:
+from collections import defaultdict from datetime import datetime
+def detect_subscriptions(transactions): grouped = defaultdict(list)
+for t in transactions: grouped[t["merchant"]].append(t)
+subscriptions = []
+for merchant, txns in grouped.items(): txns.sort(key=lambda t: t["date"]) if len(txns) < 2:
+continue # can't confirm recurrence from 1 txn
+gaps = [
+(datetime.fromisoformat(txns[i+1]["date"]) - datetime.fromisoformat(txns[i]["date"])).days
+for i in range(len(txns) - 1)
+]
+avg_gap = sum(gaps) / len(gaps)
+if 26 <= avg_gap <= 34:
+from collections import defaultdict from datetime import datetime
+def detect_subscriptions(transactions): grouped = defaultdict(list)
+for t in transactions: grouped[t["merchant"]].append(t)
+subscriptions = []
+for merchant, txns in grouped.items(): txns.sort(key=lambda t: t["date"]) if len(txns) < 2:
+continue # can't confirm recurrence from 1 txn
+gaps = [
+(datetime.fromisoformat(txns[i+1]["date"]) - datetime.fromisoformat(txns[i]["date"])).days
+for i in range(len(txns) - 1)
+]
+avg_gap = sum(gaps) / len(gaps)
+if 26 <= avg_gap <= 34:
+frequency = "monthly" elif 355 <= avg_gap <= 375:frequency = "annual" else:continue # gap pattern doesn't look recurringconfidence = min(0.98, 0.6 + 0.12 * len(txns)) # more occurrences → higher confidencesubscriptions.append({ "merchant": merchant,"amounts": [t["amount"] for t in txns], "frequency": frequency,"confidence": round(confidence, 2), "last_date": txns[-1]["date"],"current_amount": txns[-1]["amount"],})return subscriptionsfrequency = "monthly" elif 355 <= avg_gap <= 375:frequency = "annual" else:continue # gap pattern doesn't look recurringconfidence = min(0.98, 0.6 + 0.12 * len(txns)) # more occurrences → higher confidencesubscriptions.append({ "merchant": merchant,"amounts": [t["amount"] for t in txns], "frequency": frequency,"confidence": round(confidence, 2), "last_date": txns[-1]["date"],"current_amount": txns[-1]["amount"],})return subscriptions
+frequency = "monthly" elif 355 <= avg_gap <= 375:
+frequency = "annual" else:
+continue # gap pattern doesn't look recurring
+confidence = min(0.98, 0.6 + 0.12 * len(txns)) # more occurrences → higher confidence
+subscriptions.append({ "merchant": merchant,
+"amounts": [t["amount"] for t in txns], "frequency": frequency,
+"confidence": round(confidence, 2), "last_date": txns[-1]["date"],
+"current_amount": txns[-1]["amount"],
+})
+return subscriptions
+frequency = "monthly" elif 355 <= avg_gap <= 375:
+frequency = "annual" else:
+continue # gap pattern doesn't look recurring
+confidence = min(0.98, 0.6 + 0.12 * len(txns)) # more occurrences → higher confidence
+subscriptions.append({ "merchant": merchant,
+"amounts": [t["amount"] for t in txns], "frequency": frequency,
+"confidence": round(confidence, 2), "last_date": txns[-1]["date"],
+"current_amount": txns[-1]["amount"],
+})
+return subscriptions
+This matches the confidence tiers from your ChatGPT plan (3+ occurrences ≈ high confidence, 2 occurrences ≈ moderate). Keep the thresholds configurable constants, not magic numbers buried in logic — you'll want to tune them against real data during testing.
+Price Increase Detection
+Deterministic, as decided — median of history minus most recent value:
+import statisticsdef detect_price_increase(amounts: list[float], threshold_pct=5, threshold_abs=50): if len(amounts) < 2:return Nonebaseline = statistics.median(amounts[:-1]) current = amounts[-1]change = current - baselinepct = (change / baseline) * 100 if baseline else 0if change > threshold_abs or pct > threshold_pct: return {"increased": True, "amount_change": round(change, 2),"percent_change": round(pct, 1),}return {"increased": False}import statisticsdef detect_price_increase(amounts: list[float], threshold_pct=5, threshold_abs=50): if len(amounts) < 2:return Nonebaseline = statistics.median(amounts[:-1]) current = amounts[-1]change = current - baselinepct = (change / baseline) * 100 if baseline else 0if change > threshold_abs or pct > threshold_pct: return {"increased": True, "amount_change": round(change, 2),"percent_change": round(pct, 1),}return {"increased": False}
+import statistics
+def detect_price_increase(amounts: list[float], threshold_pct=5, threshold_abs=50): if len(amounts) < 2:
+return None
+baseline = statistics.median(amounts[:-1]) current = amounts[-1]
+change = current - baseline
+pct = (change / baseline) * 100 if baseline else 0
+if change > threshold_abs or pct > threshold_pct: return {
+"increased": True, "amount_change": round(change, 2),
+"percent_change": round(pct, 1),
+}
+return {"increased": False}
+import statistics
+def detect_price_increase(amounts: list[float], threshold_pct=5, threshold_abs=50): if len(amounts) < 2:
+return None
+baseline = statistics.median(amounts[:-1]) current = amounts[-1]
+change = current - baseline
+pct = (change / baseline) * 100 if baseline else 0
+if change > threshold_abs or pct > threshold_pct: return {
+"increased": True, "amount_change": round(change, 2),
+"percent_change": round(pct, 1),
+}
+return {"increased": False}
+API Contract
+This is the shape your frontend should be able to rely on regardless of which parsing tier or source produced the data:
+{"status": "success", "summary": {"total_transactions_found": 87,"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback","date_range": { "from": "2026-01-05", "to": "2026-07-05" }},{"status": "success", "summary": {"total_transactions_found": 87,"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback","date_range": { "from": "2026-01-05", "to": "2026-07-05" }},
+{
+"status": "success", "summary": {
+"total_transactions_found": 87,
+"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback",
+"date_range": { "from": "2026-01-05", "to": "2026-07-05" }
+},
+{
+"status": "success", "summary": {
+"total_transactions_found": 87,
+"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback",
+"date_range": { "from": "2026-01-05", "to": "2026-07-05" }
+},
+"subscriptions": [{"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,"confidence": 0.96,"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [{ "date": "2026-05-05", "amount": 499 },{ "date": "2026-06-05", "amount": 499 },{ "date": "2026-07-05", "amount": 649 }]}]}"subscriptions": [{"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,"confidence": 0.96,"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [{ "date": "2026-05-05", "amount": 499 },{ "date": "2026-06-05", "amount": 499 },{ "date": "2026-07-05", "amount": 649 }]}]}
+"subscriptions": [
+{
+"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,
+"confidence": 0.96,
+"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [
+{ "date": "2026-05-05", "amount": 499 },
+{ "date": "2026-06-05", "amount": 499 },
+{ "date": "2026-07-05", "amount": 649 }
+]
+}
+]
+}
+"subscriptions": [
+{
+"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,
+"confidence": 0.96,
+"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [
+{ "date": "2026-05-05", "amount": 499 },
+{ "date": "2026-06-05", "amount": 499 },
+{ "date": "2026-07-05", "amount": 649 }
+]
+}
+]
+}
+Error responses use a consistent shape too:
+{"status": "error","error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND","message": "Human-readable explanation for the UI to display"}{"status": "error","error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND","message": "Human-readable explanation for the UI to display"}
+{
+"status": "error",
+"error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND",
+"message": "Human-readable explanation for the UI to display"
+}
+{
+"status": "error",
+"error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND",
+"message": "Human-readable explanation for the UI to display"
+}
+Data Schema (Normalized Transaction)
+Field
+Type
+Notes
+date
+ISO 8601 string
+Always normalize to YYYY-MM-DD regardless of source format
+merchant
+string
+Canonical name after normalization (Section 10)
+raw_description
+string
+Keep original for debugging/audit, not shown to user by default
+amount
+float
+Always positive; sign implied by type field
+type
+"debit" | "credit"
+Only debit transactions flow into subscription detection
+source
+"pdf_table" | "pdf_regex"
+For this slice; will extend to "sms" / "csv" later
+category
+string
+From merchant dictionary; "Uncategorized" if unmatched
+Error Handling & Edge Cases
+Scenario
+Handling
+File isn't a PDF
+Reject at upload with 400 before any parsing attempt
+PDF is a scanned image (no extractable text)
+Detect via near-empty extract_text(); return NO_TRANSACTIONS_FOUND with a message suggesting a text-based statement or CSV instead — do NOT attempt OCR, out of scope for 24h
+Wrong password entered
+401 PDF_PASSWORD_INCORRECT, let user retry, don't lock after N attempts (not needed for a demo)
+Table extraction returns tables but with
+Column-alias matching (7.2) returns None for all headers → treat as table-
+Scenario
+Handling
+garbled/merged columns
+extraction failure → drop to regex fallback
+Fewer than 2 statement months of data
+Subscription detection naturally yields nothing (needs 2+ occurrences) — surface a friendly 'not enough history yet' message rather than an empty silent screen
+Multi-page PDF where a table splits across pages
+Concatenate table rows across pages before parsing, watch for header rows repeating on each page — filter out repeated header rows during row parsing
+Testing Plan & Sample Data
+Since you're supporting password-protected files and a generic parser, test against a deliberately varied set before the demo — not just your happy-path file:
+One real, unprotected PDF statement from your own bank (redacted personal info if you show it to teammates/judges).
+One real, password-protected PDF statement — confirms the decrypt flow actually works against real bank encryption, not just a locally-created test PDF.
+One synthetic PDF you generate yourself (via a script, or just typing data into a table in Word/Google Docs and exporting to PDF) with a deliberately different column order/labels than sample 1 — this is your generic-parser proof.
+One deliberately 'ugly' PDF — no visible table gridlines, text-only layout — to force and verify the regex fallback path actually triggers and produces reasonable output.
+Build the demo dataset now, not on hour 20Your live demo should not rely on someone's real personal bank statement (privacy + it's unpredictable). Build one clean synthetic PDF with 4–6 months of history, 8–10 recognizable merchants, and at least one deliberate price increase baked in (e.g. Netflix ₹499 → ₹649). Rehearse the demo against this exact file. Use the real/messy files only for engineering validation, not for judges.Build the demo dataset now, not on hour 20Your live demo should not rely on someone's real personal bank statement (privacy + it's unpredictable). Build one clean synthetic PDF with 4–6 months of history, 8–10 recognizable merchants, and at least one deliberate price increase baked in (e.g. Netflix ₹499 → ₹649). Rehearse the demo against this exact file. Use the real/messy files only for engineering validation, not for judges.
+Build the demo dataset now, not on hour 20
+Your live demo should not rely on someone's real personal bank statement (privacy + it's unpredictable). Build one clean synthetic PDF with 4–6 months of history, 8–10 recognizable merchants, and at least one deliberate price increase baked in (e.g. Netflix ₹499 → ₹649). Rehearse the demo against this exact file. Use the real/messy files only for engineering validation, not for judges.
+Build the demo dataset now, not on hour 20
+Your live demo should not rely on someone's real personal bank statement (privacy + it's unpredictable). Build one clean synthetic PDF with 4–6 months of history, 8–10 recognizable merchants, and at least one deliberate price increase baked in (e.g. Netflix ₹499 → ₹649). Rehearse the demo against this exact file. Use the real/messy files only for engineering validation, not for judges.
+Risks Specific to Your Choices
+Being blunt, as requested: you picked the two hardest options (generic parser + password support) over the safer ones. That's a legitimate bet for impressiveness, but here's what it costs you:
+Risk
+Why it happens
+Mitigation
+Generic parser fails on a layout you didn't test
+Indian bank statement layouts vary more than expected — merged cells, multi-line descriptions, inconsistent date formats across even the same bank's different account types
+Tier 1 + Tier 2 fallback (Sections 7–8) is your safety net. Test against 3+ genuinely different layouts before demo day, not just one
+Password decryption fails silently or throws an unhandled exception
+pikepdf/pypdf raise different exception types depending on encryption algorithm (RC4-40, RC4-128, AES-128, AES-256)
+Wrap decrypt logic in a broad try/except that maps any failure to PDF_PASSWORD_INCORRECT rather than crashing the endpoint
+Time sunk into parser edge cases starves the frontend/demo polish
+Generic parsing is a bottomless pit — there's always one more layout to handle
+Hard time-box: Section 4's hour ranges are not suggestions. If Tier 1+2 works on your 4 test PDFs by hour 9, stop touching the parser
+Risk
+Why it happens
+Mitigation
+Judges can't tell how 'generic' it really is just by watching one demo
+A single demo file only proves it works on that one file
+Verbally state during the demo: 'this isn't hardcoded to one bank — here's the same pipeline on a completely different statement format,' and actually show a second file briefly if time allows
+What to Explicitly Cut If Time Runs Out
+If you're behind schedule by hour 14–16, cut in this order (least damaging to demo first):
+OCR / scanned-PDF support — you were never building this; just make sure the error message is graceful (Section 15).
+Regex fallback parser refinement — if Tier 1 (table extraction) works on your demo file, a rough fallback that only needs to not crash is acceptable.
+Full 100-merchant dictionary — 20–25 merchants covering your demo file's transactions is enough; expand only if time remains.
+Password-protected support — if decryption is fighting you past hour 6, demo with an unprotected file and mention protected-file support as 'in progress' rather than losing hours here. This is the one feature you could cut entirely and still have a coherent, complete demo.
+Do NOT cut: the core table-extraction → cleaning → subscription detection → price increase chain. That chain is the entire point of this slice.
+Appendix — Suggested Backend File Structure for This Slice
+backend/├── main.py├── ingestion/# FastAPI app, /upload endpoint│├── pdf_loader.py# load_pdf(), password handling│├── table_extractor.py# Tier 1: pdfplumber table extraction + column matching│└── regex_fallback.py# Tier 2: line-based regex parsing├── cleaning/│├── transaction_cleaner.py # date/amount normalization, row filtering│└── merchant_normalizer.py # strip_noise() + dictionary/fuzzy match├── detection/│├── subscription_detector.py│└── price_checker.py├── knowledge_base/│└── merchants.json├── schemas.py# pydantic models for request/response└── tests/├── sample_clean.pdf├── sample_protected.pdf├── sample_alt_format.pdf└── sample_ugly_layout.pdfbackend/├── main.py├── ingestion/# FastAPI app, /upload endpoint│├── pdf_loader.py# load_pdf(), password handling│├── table_extractor.py# Tier 1: pdfplumber table extraction + column matching│└── regex_fallback.py# Tier 2: line-based regex parsing├── cleaning/│├── transaction_cleaner.py # date/amount normalization, row filtering│└── merchant_normalizer.py # strip_noise() + dictionary/fuzzy match├── detection/│├── subscription_detector.py│└── price_checker.py├── knowledge_base/│└── merchants.json├── schemas.py# pydantic models for request/response└── tests/├── sample_clean.pdf├── sample_protected.pdf├── sample_alt_format.pdf└── sample_ugly_layout.pdf
+backend/
+├── main.py
+├── ingestion/
+# FastAPI app, /upload endpoint
+│├── pdf_loader.py# load_pdf(), password handling
+│├── table_extractor.py# Tier 1: pdfplumber table extraction + column matching
+│└── regex_fallback.py# Tier 2: line-based regex parsing
+├── cleaning/
+│├── transaction_cleaner.py # date/amount normalization, row filtering
+│└── merchant_normalizer.py # strip_noise() + dictionary/fuzzy match
+├── detection/
+│├── subscription_detector.py
+│└── price_checker.py
+├── knowledge_base/
+│└── merchants.json
+├── schemas.py# pydantic models for request/response
+└── tests/
+├── sample_clean.pdf
+├── sample_protected.pdf
+├── sample_alt_format.pdf
+└── sample_ugly_layout.pdf
+backend/
+├── main.py
+├── ingestion/
+# FastAPI app, /upload endpoint
+│├── pdf_loader.py# load_pdf(), password handling
+│├── table_extractor.py# Tier 1: pdfplumber table extraction + column matching
+│└── regex_fallback.py# Tier 2: line-based regex parsing
+├── cleaning/
+│├── transaction_cleaner.py # date/amount normalization, row filtering
+│└── merchant_normalizer.py # strip_noise() + dictionary/fuzzy match
+├── detection/
+│├── subscription_detector.py
+│└── price_checker.py
+├── knowledge_base/
+│└── merchants.json
+├── schemas.py# pydantic models for request/response
+└── tests/
+├── sample_clean.pdf
+├── sample_protected.pdf
+├── sample_alt_format.pdf
+└── sample_ugly_layout.pdf

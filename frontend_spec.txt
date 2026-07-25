@@ -1,0 +1,302 @@
+SubSense
+Frontend Design & Build Specification
+All 5 screens — Upload, Health Dashboard, Subscriptions, Simulator, Action Center, AI Coach
+InnovaHack — Financial Health / Subscription Leak Detection Prepared for: Vedant · VESIT
+July 2026
+Scope of this documentThis is a design and implementation spec, not code. It covers the visual system (palette, type, layout), the exact structure of all 5 screens, component-level behavior, state handling, and how the frontend wires into the backend API contract from the MVP Implementation Report. Build against this directly in React + Tailwind, or adapt to any stack — every spec here is framework-agnostic except the API contract section.Scope of this documentThis is a design and implementation spec, not code. It covers the visual system (palette, type, layout), the exact structure of all 5 screens, component-level behavior, state handling, and how the frontend wires into the backend API contract from the MVP Implementation Report. Build against this directly in React + Tailwind, or adapt to any stack — every spec here is framework-agnostic except the API contract section.
+Scope of this document
+This is a design and implementation spec, not code. It covers the visual system (palette, type, layout), the exact structure of all 5 screens, component-level behavior, state handling, and how the frontend wires into the backend API contract from the MVP Implementation Report. Build against this directly in React + Tailwind, or adapt to any stack — every spec here is framework-agnostic except the API contract section.
+Scope of this document
+This is a design and implementation spec, not code. It covers the visual system (palette, type, layout), the exact structure of all 5 screens, component-level behavior, state handling, and how the frontend wires into the backend API contract from the MVP Implementation Report. Build against this directly in React + Tailwind, or adapt to any stack — every spec here is framework-agnostic except the API contract section.
+Contents
+Design direction & rationale
+Visual system — color tokens
+Visual system — typography
+Layout & navigation shell
+Screen 1 — Upload
+Screen 2 — Financial Health Dashboard
+Screen 3 — Subscription Cards
+Screen 4 — Savings Simulator
+Screen 5 — Action Center
+Screen 6 — AI Coach
+Shared components
+State model & screen flow
+API integration contract
+Responsive & accessibility requirements
+Build sequencing for 24 hours
+Design Direction & Rationale
+Most hackathon fintech dashboards default to one of three looks: warm cream with a terracotta accent, near-black with acid green, or a broadsheet layout with hairline rules. All three are common enough that judges have seen them a dozen times this cycle. SubSense uses a fourth direction, chosen specifically for this subject.
+Concept
+Ledger meets modern app. The subject is money moving through a bank statement — precision and legibility matter more than decoration. The visual language borrows from financial ledgers (tabular alignment, restrained color, numbers that line up) while staying warm and current rather than looking like a spreadsheet.
+Signature element
+Every screen that shows a Financial Health Score renders it as a radial gauge — a circular progress ring that sweeps in on load and recolors between green, amber, and coral depending on score. This is the one memorable device repeated across Dashboard and Simulator, so a judge glancing at either screen immediately recognizes the score readout without re-reading labels.
+Secondary consistency device
+Every money amount, anywhere in the app, is set in a monospace font with tabular numerals — so digits always align vertically in lists, and money reads as computed data rather than decorative text. This is a small detail that judges notice subconsciously: it signals the numbers are real outputs of a pipeline, not mocked-up placeholder text.
+Visual System — Color
+Token
+Hex
+Used for
+Ink
+0F1B2E
+Primary text, headers, dark panel backgrounds (Simulator result panel, Actions total bar)
+Ink Soft
+1C2C44
+Hover states on dark surfaces
+Paper
+FBFAF8
+Page background
+Paper Dim
+F2F0EA
+Card fills, avatar circles, neutral flag backgrounds
+Line
+DEDAD0
+Borders, dividers, gauge track (unfilled portion)
+Slate
+5B6472
+Secondary text, captions, metadata
+Signal (green)
+1A7A5E
+Savings figures, healthy score, positive recommendations
+Amber
+C4791F
+Needs-attention flags, duplicate-service tags, mid-range score
+Coral
+C1443C
+Price increases, cancel recommendations, low score
+Rule: color always carries meaning, never decoration. Green only appears on savings/healthy states, amber only on attention states, coral only on leaks/price-hikes. If a future screen needs a fourth semantic color, don't reuse these three for anything else.
+Visual System — Typography
+Role
+Typeface
+Where used
+Display / Headings
+Fraunces (serif, variable weight)
+Screen titles ("Find out where your money leaks.", "Simulate your savings") — gives the ledger/editorial gravity described in 1.1
+Body / UI
+Inter
+All body text, labels, buttons, navigation
+Data / Money
+IBM Plex Mono (tabular numerals)
+Every currency figure, the health score number, confidence percentages, dates in payment history
+Load both via Google Fonts. Headings use Fraunces at 600-700 weight, sparingly — one headline per screen, not every label. Body text stays Inter at 400-500 weight for legibility at small sizes.
+Layout & Navigation Shell
+A single persistent header across all screens: "SubSense" wordmark (Fraunces) + "leak detector" tagline (Inter, muted), with a pill-style tab bar on the right — Upload, Health, Subscriptions, Simulator, Actions, AI Coach.
+Tab lock behavior
+Every tab except Upload is disabled (greyed, non-clickable) until an analysis has completed. This prevents a judge or user from navigating into an empty Dashboard before data exists, and it visually communicates the intended flow: Upload first, everything else unlocks after.
+Active tab styling
+Active tab: filled ink-navy pill with paper-white text. Inactive tab: plain ink text, no fill. Locked tab: slate-light text, not-allowed cursor. This three-state system needs no icons or extra copy — color and fill alone communicate state.
+Page width & spacing
+Content max-width 1024–1152px (roughly max-w-5xl), centered, generous side padding (24px mobile, scaling up). Vertical rhythm: large top padding on every screen (56px) so each screen's headline has room to breathe before content starts.
+Screen 1 — Upload
+Purpose: get a bank statement into the pipeline with minimal friction, and handle the password-protected case gracefully (per the backend report, Section 6).
+Layout
+Eyebrow label "Step 1" in signal green, small caps tracking
+Headline (Fraunces, large): "Find out where your money leaks."
+One sentence of supporting copy explaining what happens to the file
+Large dashed-border dropzone, centered icon, "Drag your statement here" + "Choose file" button
+Below the dropzone: a quiet "Try the demo dataset" link for judges/users without a statement handy
+States
+State
+What changes
+Idle
+Empty dropzone as described above
+Drag-over
+Dropzone border turns solid ink, background tints to Paper Dim
+File selected
+Dropzone content replaced by a compact file row: filename, size, remove (×) button. "Analyze statement" button appears below
+Needs password
+Amber-tinted panel appears below the file row: lock icon, "This PDF needs a password," a hint line ("usually your date of birth"), password input + "Unlock" button
+Wrong password
+Same panel, error tone — distinguish this from "needs password" so the user knows to retry, not that the file itself is unsupported
+Loading
+Dropzone and buttons replaced by a centered spinner + "Reading transactions and detecting subscriptions…"
+Error (not a PDF, parse failed)
+Coral-tinted panel with a specific, plain-language message — never a raw error code
+Copy rules
+Every error message names what went wrong and what to do next. "That file isn't a PDF. Upload a bank statement in PDF format" — not "Invalid file type." This matches the interface-voice guidance: errors don't apologize, and they're never vague.
+Screen 2 — Financial Health Dashboard
+Purpose: the first screen after analysis. Single most important screen in the app — sets up everything else.
+Layout
+Two-column hero at the top: the radial Health Gauge on the left (fixed size ~220px), headline + four stat pairs on the right (Monthly leakage, Potential savings, Subscriptions count, Need attention count). Below the hero: a row of three flag cards.
+Headline logic
+The headline text changes based on score, not static copy — this is what makes the dashboard feel like a real analysis rather than a template:
+Score range
+Headline
+75–100
+"Mostly in good shape."
+50–74
+"A few leaks worth plugging."
+0–49
+"Several leaks draining your money."
+Flag cards (row of 3)
+Price increase detected — coral tint, shows count + the most significant hike ("Netflix +30.1%")
+Duplicate services — amber tint, shows count + merchant names
+Recommended to cancel — neutral (paper-dim) tint, shows count + total monthly savings if cancelled
+Each flag card is clickable — clicking navigates to Subscriptions (price/duplicate cards) or Actions (cancel card). This is the connective tissue that makes the dashboard a launchpad, not a dead end.
+Bottom actions
+Two buttons: "Try the savings simulator" (filled, primary) and "View all subscriptions" (outlined, secondary) — gives the user/judge an explicit next step rather than expecting them to find the nav tabs.
+Screen 3 — Subscription Cards
+Purpose: where users spend the most time. Replaces the traditional data-table with expandable cards.
+Collapsed card
+Single row: avatar circle (merchant initial, Paper Dim background), merchant name + inline tags (price-hike badge in coral, duplicate badge in amber, only shown when relevant), category + frequency as muted subtext, current amount (mono, right-aligned), chevron indicating expand state.
+Expanded card
+On click, reveals two stacked panels below the row:
+Payment history — a simple bar chart, one bar per statement month, month label underneath (mono, small). The most recent bar is colored coral if a price increase was detected on it, otherwise ink navy at full opacity; older bars fade to ~35–75% opacity by recency so the eye lands on the latest value first.
+Recommendation panel — signal-green tinted, shows the recommended action (Keep / Downgrade / Cancel), a one-line reason, and the monthly saving amount in mono on the right if applicable.
+Interaction rule
+Only one card expanded at a time is NOT required — allow multiple cards open simultaneously, since users comparing two subscriptions side-by-side (e.g. two music services before deciding which to cancel) is a realistic use case this screen should support.
+Screen 4 — Savings Simulator
+This is the feature to lead the demo with — it turns the app from a report into a decision tool.
+Layout
+Two-column: a checklist of actionable subscriptions on the left (only subscriptions with a Downgrade or Cancel recommendation appear here — "Keep" subscriptions aren't toggleable, since there's nothing to simulate), and a sticky result panel on the right with a dark ink-navy background.
+Checklist rows
+Each row: checkbox, action label ("Cancel Adobe Creative Cloud" / "Downgrade Netflix"), one-line reason as subtext, monthly saving amount in mono on the right. Checked rows get a subtle Paper Dim fill and ink border to distinguish from unchecked.
+Result panel (dark, sticky)
+Contains: the same radial Health Gauge component (smaller, ~140px) recomputed live from only the checked subscriptions, a small delta indicator ("↑ from 35") showing movement from the baseline score, then Monthly Savings and Annual Savings as large mono figures in white.
+Live recompute — the core mechanic
+Every checkbox toggle immediately recalculates: the health score (recomputed excluding subscriptions the user hasn't checked for action), the monthly savings total, and the annual savings total. No submit button, no delay — this instant feedback loop is the entire point of the screen and should never feel like it's waiting on anything.
+Screen 5 — Action Center
+Purpose: the screen a user leaves with. Prioritized, not alphabetical or chronological.
+Sort order
+Cancel actions first, then Downgrade, then Keep last. Within the same action type, order by whatever the backend returns (typically descending savings). This ordering itself communicates priority without needing a separate "priority" label.
+Row anatomy
+Colored dot (coral = cancel, amber = downgrade, signal green = keep) — small, left-aligned, functions like a status indicator. Action + merchant as the primary line ("Cancel Adobe Creative Cloud"), reason + confidence percentage as subtext, annual saving in mono on the right (or "no change" in muted slate for Keep rows).
+Total bar
+A full-width dark ink-navy bar at the bottom: "Total potential savings" label + the sum of all recommended actions' annual savings, large and in mono white. This is the number a judge should remember walking away.
+Screen 6 — AI Coach
+Purpose: translate the computed analysis into plain-language insights via a single LLM call (per the backend report's AI Recommendation Engine).
+Layout
+A single card (Paper Dim background) containing a small "Generated from your statement" eyebrow with a sparkle icon, then 3–4 insight lines, each with a small signal-green dot bullet.
+Insight content rules
+Insights are generated from the computed summary object (monthly spend, price hikes, duplicates, potential savings)
+— never from raw transaction text. Keep each insight to one sentence, plain language, with real numbers inline ("You spend ₹3,330 a month on subscriptions") rather than vague statements ("Your spending seems high").
+Trust footnote
+A small muted line beneath the card stating that insights come from one LLM call over the computed summary and that no raw transaction data leaves the analysis pipeline — this reassures both users and judges evaluating data-handling practices, and matches the backend architecture's actual design (Section titled "Feature 5 — AI Recommendation Engine" in the original plan).
+Shared Components
+Component
+Spec
+Health Gauge
+Circular SVG progress ring, ~10px stroke, rounded cap. Track color: Line (#DEDAD0). Fill color: Signal/Amber/Coral by score threshold (≥75 / 50–74 / <50). Center: large mono score number + "/100" subtext. Animates via stroke-dashoffset sweep on mount (~1.1s ease-out) — never instant, this is the one place motion is deliberately showcased
+Money display
+Always mono font, tabular numerals, ₹ prefix, comma-grouped (en-IN locale). Sizes range from small inline (confidence rows) to large (simulator totals) but always the same font — never switch to a sans-serif for money anywhere
+Flag / tag badges
+Small pill, colored background + matching text color from the semantic palette (coral/amber only
+— never signal green for a warning tag), icon + short label, 11-12px text
+Card
+Rounded corners (16-20px radius), 1px Line-colored border, white or Paper Dim fill depending on context, consistent internal padding (~20px)
+State Model & Screen Flow
+Upload (no data yet)││ analysis completes▼Dashboard ──┬──▶ Subscriptions ──▶ (expand cards)│││├──▶ Simulator ──▶ (toggle actions, live recompute)│││└──▶ Actions ──▶ (view prioritized list)│└──▶ AI Coach (insights generated from same computed summary)Upload (no data yet)││ analysis completes▼Dashboard ──┬──▶ Subscriptions ──▶ (expand cards)│││├──▶ Simulator ──▶ (toggle actions, live recompute)│││└──▶ Actions ──▶ (view prioritized list)│└──▶ AI Coach (insights generated from same computed summary)
+Upload (no data yet)
+│
+│ analysis completes
+▼
+Dashboard ──┬──▶ Subscriptions ──▶ (expand cards)
+││
+│├──▶ Simulator ──▶ (toggle actions, live recompute)
+││
+│└──▶ Actions ──▶ (view prioritized list)
+│
+└──▶ AI Coach (insights generated from same computed summary)
+Upload (no data yet)
+│
+│ analysis completes
+▼
+Dashboard ──┬──▶ Subscriptions ──▶ (expand cards)
+││
+│├──▶ Simulator ──▶ (toggle actions, live recompute)
+││
+│└──▶ Actions ──▶ (view prioritized list)
+│
+└──▶ AI Coach (insights generated from same computed summary)
+Single source of truth: the analysis result (subscriptions array + summary) lives at the top level once fetched, and every screen derives its own view from it — no screen re-fetches or holds a separate copy. This matters for the Simulator especially, since its baseline score must match the Dashboard's score exactly, or a judge will notice the numbers don't agree.
+API Integration Contract
+Matches Section 13 of the backend MVP report exactly — the frontend should never need backend changes if it consumes this shape:
+POST /api/upload (multipart/form-data: file, password?)Success response:{"status": "success", "summary": {"total_transactions_found": 87,"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback","date_range": { "from": "2026-01-05", "to": "2026-07-05" }},"subscriptions": [POST /api/upload (multipart/form-data: file, password?)Success response:{"status": "success", "summary": {"total_transactions_found": 87,"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback","date_range": { "from": "2026-01-05", "to": "2026-07-05" }},"subscriptions": [
+POST /api/upload (multipart/form-data: file, password?)
+Success response:
+{
+"status": "success", "summary": {
+"total_transactions_found": 87,
+"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback",
+"date_range": { "from": "2026-01-05", "to": "2026-07-05" }
+},
+"subscriptions": [
+POST /api/upload (multipart/form-data: file, password?)
+Success response:
+{
+"status": "success", "summary": {
+"total_transactions_found": 87,
+"subscriptions_detected": 12, "parsing_method": "table" | "regex_fallback",
+"date_range": { "from": "2026-01-05", "to": "2026-07-05" }
+},
+"subscriptions": [
+{"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,"confidence": 0.96,"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [ { "date": "2026-05-05", "amount": 499 }, ... ]}]}Error response:{"status": "error","error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND","message": "Human-readable explanation for the UI"}{"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,"confidence": 0.96,"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [ { "date": "2026-05-05", "amount": 499 }, ... ]}]}Error response:{"status": "error","error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND","message": "Human-readable explanation for the UI"}
+{
+"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,
+"confidence": 0.96,
+"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [ { "date": "2026-05-05", "amount": 499 }, ... ]
+}
+]
+}
+Error response:
+{
+"status": "error",
+"error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND",
+"message": "Human-readable explanation for the UI"
+}
+{
+"merchant": "Netflix", "category": "Entertainment", "frequency": "monthly", "current_amount": 649,
+"confidence": 0.96,
+"price_change": { "increased": true, "amount_change": 150, "percent_change": 30.1 }, "history": [ { "date": "2026-05-05", "amount": 499 }, ... ]
+}
+]
+}
+Error response:
+{
+"status": "error",
+"error_code": "PDF_PASSWORD_REQUIRED" | "PDF_PASSWORD_INCORRECT" | "PARSE_FAILED" | "NO_TRANSACTIONS_FOUND",
+"message": "Human-readable explanation for the UI"
+}
+Frontend-computed fields
+The backend does not need to compute the Health Score, recommendation actions, or duplicate grouping — these can be derived client-side from the subscriptions array (price_change + a simple duplicate-category check + a savings threshold), which keeps the backend simpler and matches the deterministic, explainable approach the backend report argues for throughout. If time allows, moving this logic server-side later is a clean refactor, not a rewrite.
+Error code → UI state mapping
+error_code
+UI behavior
+PDF_PASSWORD_REQUIRED
+Show the password panel (Upload screen, Section 5.2)
+PDF_PASSWORD_INCORRECT
+Show the password panel again with an error tone, keep the field editable
+PARSE_FAILED
+Show the generic error panel with the backend's message verbatim
+NO_TRANSACTIONS_FOUND
+Show the error panel with a specific suggestion: try a different statement or the demo dataset
+Responsive & Accessibility Requirements
+All 6 screens usable down to a 375px mobile viewport — the Dashboard hero and Simulator's two-column layouts stack vertically below the md breakpoint (~768px)
+Visible keyboard focus ring on every interactive element (inputs, buttons, checkboxes, expandable card headers)
+— do not remove the browser default without replacing it
+Respect prefers-reduced-motion: gauge sweep and card-expand animations should skip to their end state instantly for users with this preference set
+Every icon-only control (remove-file ×, chevron) has an aria-label or accessible name
+Color is never the only signal — price-hike and duplicate badges carry both an icon and a text label, not just a colored dot
+Build Sequencing for 24 Hours
+Hours
+Deliverable
+0–1
+Design tokens set up (color/type/spacing), nav shell with locked-tab behavior
+1–4
+Upload screen — all states in Section 5.2, wired to mock data first, real API once backend is ready
+4–6
+Dashboard — hero + gauge + flag cards
+6–8
+Subscriptions — collapsed + expanded card states, bar chart
+8–11
+Simulator — checklist + live-recompute result panel (highest-value screen, budget the most time)
+11–12
+Actions screen
+12–13
+AI Coach screen
+13–15
+Wire Upload to the real backend endpoint, test password + error flows against real responses
+15–20
+Responsive pass, keyboard focus pass, fix whatever breaks against real (not mock) data
+20–24
+Buffer + demo rehearsal — walk the exact Upload → Dashboard → Simulator → Actions path judges will see
+The Simulator is the feature to protect if time runs short elsewhere — it's the one screen that turns a static report into something a judge remembers. If a screen has to be cut or shipped rough, let it be AI Coach (Section 10), not Simulator.
