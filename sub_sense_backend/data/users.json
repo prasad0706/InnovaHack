@@ -1,0 +1,104 @@
+{
+  "testuser@subsense.app": {
+    "id": "4c9718fa-dfc2-46ad-b219-530b9198c2b5",
+    "email": "testuser@subsense.app",
+    "name": "Test User",
+    "password_hash": "2a61c268d32682b95f666c200db9b49ca99a12812391bd852121c0868607feea",
+    "salt": "6733eb1ac0670daebc80ffc0879f70a8",
+    "token": "lcH1Ax6D4mjarYhINIn9bKjpe7d0KXUpKXCgtcgTSPk"
+  },
+  "prasad@gmail.com": {
+    "id": "82860113-d36e-4729-8c1f-cda0de00f00f",
+    "email": "prasad@gmail.com",
+    "name": "prasad",
+    "password_hash": "f52733ee084a032f52bf6fd01786850b6f35e245cf99af7b75670b9c66022df5",
+    "salt": "db307f10b904cb715587bff18cca8fa9",
+    "token": "0yAgTwKwONwLIfB5ERus4bnfChvDXrirvfocTev6bF4",
+    "is_bank_connected": true,
+    "connected_bank": "HDFC",
+    "bank_connected_at": "2026-07-25T17:31:48.706727+00:00"
+  },
+  "prasad131@gmail.com": {
+    "id": "3e4479cc-ec28-41b2-94a4-66b8c10417e0",
+    "email": "prasad131@gmail.com",
+    "name": "prasad mahajan",
+    "password_hash": "9f6c063d3b5e0af7fe64fd068e1575edf04842977d614e0858802c71f10eb943",
+    "salt": "c823e020278a97fcf225e2c3dbfd8ad4",
+    "token": "Lp3_-w19_k1j7u2ztulCYt2WXshH7xHcVnBigmKsHLQ"
+  },
+  "prasadmahajan@gmail.com": {
+    "id": "e41b3edf-4306-4989-828c-a6c370d6035c",
+    "email": "prasadmahajan@gmail.com",
+    "name": "prasad mahajann",
+    "password_hash": "84b6906ac6583862f456a6f7a78b768faa8dc3093ab91e3277915d32cf83c20e",
+    "salt": "55e9c020a8cc7228a1941de6d51501ee",
+    "token": "xpidJjryay0WouE3OvWTh9ZqBu3apQj4i95_hr-0e-Q"
+  },
+  "prasadg@gmail.com": {
+    "id": "c1b4247a-5fb1-40f1-8f24-8f8a3579da91",
+    "email": "prasadg@gmail.com",
+    "name": "prasadh",
+    "password_hash": "4dfd778d1b33a42e96ee3037e9384b6513d008b74be8cc36270058b8926e17dd",
+    "salt": "9e009d9e5025d2dd0c1cc9f2e96a7c57",
+    "token": "s_BnMGATVmCB2HIKnIsLr8nw9GZuBOI62CeqNoWhM6w"
+  },
+  "prasad2@gmail.com": {
+    "id": "66b0b982-fc7a-4704-aabd-d73f8fa8ca50",
+    "email": "prasad2@gmail.com",
+    "name": "prasadh",
+    "password_hash": "4797c4498611b3fb9ede04409e64c29caaea4dac3356d4c2d6681755ae2de5fd",
+    "salt": "029fd9e56574061fa245662ee4010f72",
+    "token": "jek21bpgK_2GKOnXqqidGJGgkdhNY0VpEQqPDAZRteU"
+  },
+  "prasadj@gmail.com": {
+    "id": "2f79ef15-92c1-4f2c-8287-1be1f544913d",
+    "email": "prasadj@gmail.com",
+    "name": "prasadj",
+    "password_hash": "76efd9b0f1c696f036ab9c827a7d72e7622b228c4fa683cdad2fa701435873ef",
+    "salt": "246cc9a4369cc23af73baaad0219c718",
+    "token": "QRJz7nTLSLq1ISwygipUcD8XHMNNG9ptB4zFWX-Adc0"
+  },
+  "test@gmail.com": {
+    "id": "7b364c05-975b-45f8-8c5e-65d9ba206c35",
+    "email": "test@gmail.com",
+    "name": "test",
+    "password_hash": "a1a3a56ca9e7484391f1fe564ef4a572809bf64ed315109ba608a46199201791",
+    "salt": "a3608e44d8c6f26ab8d33a89bae671c5",
+    "token": "swXcLpaxUWtFEkFvn8UZR_uuEyADEHQv0zCWdoWnVDo"
+  },
+  "testing@gmail.com": {
+    "id": "095d08d0-1921-4552-b6b2-7b5a90e2b261",
+    "email": "testing@gmail.com",
+    "name": "prasadtest",
+    "password_hash": "ccf3fd904f3b0f84b6fc26ce317a943582a60d83dbf53efcd69f22e4da601b86",
+    "salt": "51d0cb22d252a1574520a312bef97880",
+    "token": "SF-_1irGock1_TNLCkB95r1NwrOXRgbIf8VG1Rbry_c"
+  },
+  "rajat@gmail.com": {
+    "id": "2f4f367f-db08-480b-aaa0-d2c24a168a7d",
+    "email": "rajat@gmail.com",
+    "name": "rajat",
+    "password_hash": "8892bfb1541f19448a24860e11572dd7b1519991b991e9ec6592cd5dfb6da542",
+    "salt": "f203a86cf529f97c13f92399f619883e",
+    "token": "B5NUeQWSgcQoiUgA8H5o-4liadNYsUTWsfjoVe99J8I"
+  },
+  "prasadl@gmail.com": {
+    "id": "707ca90e-e3b7-432f-a5ad-d564fd53ee02",
+    "email": "prasadl@gmail.com",
+    "name": "prasadl",
+    "password_hash": "e6ce955b186eead67a63fe12ab536bf6178caa6854737a7aa1e2273966182119",
+    "salt": "f1f8523590e354b5a24a9c5cc07d3bd0",
+    "token": "7vUxXaBTua57NBv_8W4QBXfm7EDqthp810wjcfypX2Y"
+  },
+  "test5@gmail.com": {
+    "id": "97d4e5c1-4158-476a-a79e-08f7dc7fda83",
+    "email": "test5@gmail.com",
+    "name": "test5",
+    "password_hash": "af1dd1a7078c657dc413c578554b24392fefcf971e94181dcad30a72670cedd3",
+    "salt": "13a2371f8b3b439d7dd3808458caed11",
+    "token": "cVv5Ctor0NyPedZvvTS6XIhiN4ukHQVmXPp9a7gPans",
+    "is_bank_connected": true,
+    "connected_bank": "ICICI",
+    "bank_connected_at": "2026-07-25T17:38:16.328164+00:00"
+  }
+}

@@ -4,11 +4,28 @@ from typing import List, Dict, Any
 
 from detection.price_checker import detect_price_increase
 
+KNOWN_SUBSCRIPTION_CATEGORIES = {
+    "Entertainment", "Software", "AI Tools", "Music",
+    "Cloud Services", "Fitness", "Career", "Food & Delivery"
+}
+
+def calculate_health_score(subscriptions: List[Dict[str, Any]]) -> int:
+    if not subscriptions:
+        return 100
+    total_spend = sum(s["current_amount"] for s in subscriptions)
+    leakage = sum(s["current_amount"] for s in subscriptions if s.get("recommended_action") != "Keep")
+    if total_spend == 0:
+        return 100
+    ratio = leakage / total_spend
+    score = round(100 - (ratio * 65))
+    return max(15, min(98, score))
+
 def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     Rule-based subscription detector.
     Groups transactions by canonical merchant, sorts by date,
     calculates recurrence gaps & confidence, and assigns per-subscription action recommendations.
+    Supports single-occurrence known subscription merchants for 1-month statements!
     """
     grouped = defaultdict(list)
     for t in transactions:
@@ -18,10 +35,8 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
     sub_index = 1
 
     for merchant, txns in grouped.items():
-        # Sort transactions chronologically
         txns.sort(key=lambda x: x["date"])
 
-        # Create history items list
         history = [{"date": t["date"], "amount": t["amount"]} for t in txns]
         current_amount = txns[-1]["amount"]
         category = txns[0]["category"]
@@ -38,27 +53,32 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
                     gaps.append((d2 - d1).days)
 
                 avg_gap = sum(gaps) / len(gaps)
-                if 25 <= avg_gap <= 35:
+                if 22 <= avg_gap <= 38:
                     frequency = "monthly"
                     confidence = min(0.98, 0.6 + 0.12 * len(txns))
-                elif 350 <= avg_gap <= 380:
+                elif 340 <= avg_gap <= 385:
                     frequency = "annual"
                     confidence = min(0.98, 0.6 + 0.12 * len(txns))
                 else:
-                    # Skip if gaps don't resemble subscription recurrence
-                    continue
+                    if category in KNOWN_SUBSCRIPTION_CATEGORIES:
+                        frequency = "monthly"
+                        confidence = 0.70
+                    else:
+                        continue
             except Exception:
-                confidence = 0.75
+                if category in KNOWN_SUBSCRIPTION_CATEGORIES:
+                    confidence = 0.75
+                else:
+                    continue
         else:
-            # Single transaction - only include if recognized subscription merchant
-            if category == "General":
+            if category in KNOWN_SUBSCRIPTION_CATEGORIES:
+                frequency = "monthly"
+                confidence = 0.75
+            else:
                 continue
-            confidence = 0.70
 
-        # Check price increase
         price_change = detect_price_increase(history)
 
-        # Derive action recommendation
         action = "Keep"
         reason = "Regular usage, standard pricing."
         monthly_saving = 0.0
@@ -92,62 +112,3 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
         sub_index += 1
 
     return subscriptions
-
-
-def calculate_health_score(subscriptions: List[Dict[str, Any]]) -> int:
-    """
-    Calculate the baseline Financial Health / Leak Score using the same formula
-    as the client-side Flutter implementation.
-    """
-    if not subscriptions:
-        return 100
-
-    total_spend = 0.0
-    leakage = 0.0
-    price_hikes_count = 0
-    high_cost_non_essentials_count = 0
-    category_counts = {}
-
-    for s in subscriptions:
-        amount = s["current_amount"]
-        action = s.get("recommended_action", "Keep")
-        has_price_hike = s.get("price_change", {}).get("increased", False)
-        category = s.get("category", "General")
-
-        total_spend += amount
-        if action != "Keep":
-            leakage += amount
-
-        if has_price_hike:
-            price_hikes_count += 1
-
-        if action == "Cancel" and amount > 500:
-            high_cost_non_essentials_count += 1
-
-        category_counts[category] = category_counts.get(category, 0) + 1
-
-    if total_spend == 0:
-        return 100
-
-    # 1. Leakage Ratio Penalty (Max -50 points)
-    leakage_ratio = leakage / total_spend
-    leakage_penalty = leakage_ratio * 50
-
-    # 2. Price Hike Penalty (-5 points per hike)
-    price_hike_penalty = price_hikes_count * 5.0
-
-    # 3. Duplicate Subscriptions Penalty (-10 points per category with duplicates)
-    duplicate_categories_count = 0
-    for cat, count in category_counts.items():
-        if count > 1:
-            duplicate_categories_count += 1
-
-    # Also count explicit 'Duplicate' category if any
-    explicit_duplicates = sum(1 for s in subscriptions if s.get("category") == "Duplicate")
-    duplicate_penalty = (duplicate_categories_count + explicit_duplicates) * 10.0
-
-    # 4. High-Cost Non-Essential Penalty (-5 points each)
-    high_cost_penalty = high_cost_non_essentials_count * 5.0
-
-    raw_score = 100 - leakage_penalty - price_hike_penalty - duplicate_penalty - high_cost_penalty
-    return max(15, min(98, round(raw_score)))

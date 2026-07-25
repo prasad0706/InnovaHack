@@ -39,7 +39,7 @@ def clean_transactions(raw_list: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     seen = set()
     
     for item in raw_list:
-        desc = item.get("description", "").strip()
+        desc = (item.get("description") or item.get("narration") or item.get("raw_description") or "").strip()
         desc_lower = desc.lower()
         
         # Filter non-subscription debit rows

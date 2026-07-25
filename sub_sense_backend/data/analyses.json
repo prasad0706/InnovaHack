@@ -1,0 +1,4383 @@
+{
+  "vedanthackathon@gmail.com": {
+    "analysis_id": "d7d19aed-0a56-4f3a-bbc4-1ea85d842dc9",
+    "user_id": "vedanthackathon@gmail.com",
+    "summary": {
+      "total_transactions_found": 35,
+      "subscriptions_detected": 4,
+      "parsing_method": "table",
+      "date_range": {
+        "from_date": "2026-02-01",
+        "to_date": "2026-07-25"
+      },
+      "health_score": 82
+    },
+    "subscriptions": [
+      {
+        "id": "sub_101",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "current_amount": 649.0,
+        "recommended_action": "Downgrade",
+        "monthly_saving": 150.0
+      },
+      {
+        "id": "sub_102",
+        "merchant": "Spotify",
+        "category": "Music",
+        "current_amount": 119.0,
+        "recommended_action": "Keep",
+        "monthly_saving": 0.0
+      }
+    ],
+    "all_transactions": [
+      {
+        "date": "2026-07-25",
+        "raw_description": "UPI/NETFLIX.COM/BANGALORE",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 649.0
+      },
+      {
+        "date": "2026-07-18",
+        "raw_description": "UPI/SPOTIFY INDIA",
+        "merchant": "Spotify",
+        "category": "Music",
+        "amount": 119.0
+      }
+    ]
+  },
+  "default_user": {
+    "analysis_id": "a35595aa-61b4-452e-b9da-9a3e85b835f0",
+    "user_id": "default_user",
+    "summary": {
+      "total_transactions_found": 42,
+      "subscriptions_detected": 7,
+      "parsing_method": "Plaid Sandbox (State Bank of India)",
+      "bank_connected": "State Bank of India",
+      "date_range": {
+        "from_date": "2026-02-01",
+        "to_date": "2026-07-16"
+      },
+      "health_score": 64
+    },
+    "subscriptions": [
+      {
+        "id": "sub_1",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services",
+        "frequency": "monthly",
+        "current_amount": 75.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-03-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-04-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-05-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-06-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-07-16",
+            "amount": 75.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_2",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery",
+        "frequency": "monthly",
+        "current_amount": 299.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-03-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-04-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-05-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-06-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-07-13",
+            "amount": 299.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_3",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 149.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-03-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-04-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-05-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-06-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-07-05",
+            "amount": 149.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_4",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software",
+        "frequency": "monthly",
+        "current_amount": 1675.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-03-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-04-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-05-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-06-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-07-04",
+            "amount": 1675.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost software subscription.",
+        "monthly_saving": 1675.0
+      },
+      {
+        "id": "sub_5",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 649.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-02",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-03-02",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-04-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-05-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-06-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-07-02",
+            "amount": 649.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost entertainment subscription.",
+        "monthly_saving": 649.0
+      },
+      {
+        "id": "sub_6",
+        "merchant": "Spotify",
+        "category": "Music",
+        "frequency": "monthly",
+        "current_amount": 119.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-03-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-04-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-05-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-06-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-07-01",
+            "amount": 119.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_7",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness",
+        "frequency": "monthly",
+        "current_amount": 1250.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-03-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-04-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-05-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-06-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-07-01",
+            "amount": 1250.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      }
+    ],
+    "all_transactions": [
+      {
+        "date": "2026-07-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      }
+    ]
+  },
+  "707ca90e-e3b7-432f-a5ad-d564fd53ee02": {
+    "analysis_id": "e0828592-355b-45ec-a4c6-09f29182c002",
+    "user_id": "707ca90e-e3b7-432f-a5ad-d564fd53ee02",
+    "summary": {
+      "total_transactions_found": 42,
+      "subscriptions_detected": 7,
+      "parsing_method": "Plaid Sandbox (State Bank of India)",
+      "bank_connected": "State Bank of India",
+      "date_range": {
+        "from_date": "2026-02-01",
+        "to_date": "2026-07-16"
+      },
+      "health_score": 64
+    },
+    "subscriptions": [
+      {
+        "id": "sub_1",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services",
+        "frequency": "monthly",
+        "current_amount": 75.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-03-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-04-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-05-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-06-16",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-07-16",
+            "amount": 75.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_2",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery",
+        "frequency": "monthly",
+        "current_amount": 299.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-03-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-04-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-05-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-06-13",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-07-13",
+            "amount": 299.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_3",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 149.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-03-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-04-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-05-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-06-05",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-07-05",
+            "amount": 149.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_4",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software",
+        "frequency": "monthly",
+        "current_amount": 1675.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-03-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-04-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-05-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-06-04",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-07-04",
+            "amount": 1675.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost software subscription.",
+        "monthly_saving": 1675.0
+      },
+      {
+        "id": "sub_5",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 649.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-02",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-03-02",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-04-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-05-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-06-02",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-07-02",
+            "amount": 649.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost entertainment subscription.",
+        "monthly_saving": 649.0
+      },
+      {
+        "id": "sub_6",
+        "merchant": "Spotify",
+        "category": "Music",
+        "frequency": "monthly",
+        "current_amount": 119.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-03-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-04-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-05-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-06-01",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-07-01",
+            "amount": 119.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_7",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness",
+        "frequency": "monthly",
+        "current_amount": 1250.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-03-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-04-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-05-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-06-01",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-07-01",
+            "amount": 1250.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      }
+    ],
+    "all_transactions": [
+      {
+        "date": "2026-07-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      }
+    ]
+  },
+  "user_1001": {
+    "analysis_id": "b29d1d5f-83da-4fb5-9cdc-0d663bc39b93",
+    "user_id": "user_1001",
+    "summary": {},
+    "subscriptions": [],
+    "all_transactions": [
+      {
+        "date": "2026-07-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 649.0
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 649.0
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 649.0
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 499.0
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 499.0
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 499.0
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-01-05",
+        "raw_description": "UPI/NETFLIX.COM",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "amount": 499.0
+      }
+    ]
+  },
+  "82860113-d36e-4729-8c1f-cda0de00f00f": {
+    "analysis_id": "667e4b3f-c0bc-4d56-ab03-0bd7bba059c7",
+    "user_id": "82860113-d36e-4729-8c1f-cda0de00f00f",
+    "summary": {
+      "total_transactions_found": 42,
+      "subscriptions_detected": 7,
+      "parsing_method": "Plaid Sandbox (HDFC)",
+      "bank_connected": "HDFC",
+      "date_range": {
+        "from_date": "2026-02-04",
+        "to_date": "2026-07-20"
+      },
+      "health_score": 64
+    },
+    "subscriptions": [
+      {
+        "id": "sub_1",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software",
+        "frequency": "monthly",
+        "current_amount": 1675.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-03-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-04-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-05-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-06-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-07-20",
+            "amount": 1675.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost software subscription.",
+        "monthly_saving": 1675.0
+      },
+      {
+        "id": "sub_2",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 649.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-19",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-03-19",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-04-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-05-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-06-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-07-19",
+            "amount": 649.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost entertainment subscription.",
+        "monthly_saving": 649.0
+      },
+      {
+        "id": "sub_3",
+        "merchant": "Spotify",
+        "category": "Music",
+        "frequency": "monthly",
+        "current_amount": 119.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-03-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-04-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-05-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-06-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-07-18",
+            "amount": 119.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_4",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery",
+        "frequency": "monthly",
+        "current_amount": 299.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-03-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-04-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-05-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-06-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-07-15",
+            "amount": 299.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_5",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness",
+        "frequency": "monthly",
+        "current_amount": 1250.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-03-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-04-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-05-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-06-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-07-07",
+            "amount": 1250.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_6",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 149.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-03-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-04-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-05-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-06-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-07-06",
+            "amount": 149.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_7",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services",
+        "frequency": "monthly",
+        "current_amount": 75.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-03-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-04-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-05-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-06-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-07-04",
+            "amount": 75.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      }
+    ],
+    "all_transactions": [
+      {
+        "date": "2026-07-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-07-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS HDFC",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-19",
+        "raw_description": "UPI/NETFLIX.COM/HDFC",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-18",
+        "raw_description": "UPI/SPOTIFY INDIA HDFC",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP HDFC",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-07",
+        "raw_description": "CULTFIT HEALTHCARE HDFC",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM HDFC",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD HDFC",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      }
+    ]
+  },
+  "97d4e5c1-4158-476a-a79e-08f7dc7fda83": {
+    "analysis_id": "a403dd2e-35e0-4284-99d1-653fd7331073",
+    "user_id": "97d4e5c1-4158-476a-a79e-08f7dc7fda83",
+    "summary": {
+      "total_transactions_found": 42,
+      "subscriptions_detected": 7,
+      "parsing_method": "Plaid Sandbox (ICICI)",
+      "bank_connected": "ICICI",
+      "date_range": {
+        "from_date": "2026-02-04",
+        "to_date": "2026-07-20"
+      },
+      "health_score": 64
+    },
+    "subscriptions": [
+      {
+        "id": "sub_1",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software",
+        "frequency": "monthly",
+        "current_amount": 1675.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-03-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-04-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-05-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-06-20",
+            "amount": 1675.0
+          },
+          {
+            "date": "2026-07-20",
+            "amount": 1675.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost software subscription.",
+        "monthly_saving": 1675.0
+      },
+      {
+        "id": "sub_2",
+        "merchant": "Netflix",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 649.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-19",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-03-19",
+            "amount": 499.0
+          },
+          {
+            "date": "2026-04-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-05-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-06-19",
+            "amount": 649.0
+          },
+          {
+            "date": "2026-07-19",
+            "amount": 649.0
+          }
+        ],
+        "recommended_action": "Cancel",
+        "action_reason": "Unused high-cost entertainment subscription.",
+        "monthly_saving": 649.0
+      },
+      {
+        "id": "sub_3",
+        "merchant": "Spotify",
+        "category": "Music",
+        "frequency": "monthly",
+        "current_amount": 119.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-03-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-04-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-05-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-06-18",
+            "amount": 119.0
+          },
+          {
+            "date": "2026-07-18",
+            "amount": 119.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_4",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery",
+        "frequency": "monthly",
+        "current_amount": 299.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-03-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-04-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-05-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-06-15",
+            "amount": 299.0
+          },
+          {
+            "date": "2026-07-15",
+            "amount": 299.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_5",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness",
+        "frequency": "monthly",
+        "current_amount": 1250.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-03-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-04-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-05-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-06-07",
+            "amount": 1250.0
+          },
+          {
+            "date": "2026-07-07",
+            "amount": 1250.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_6",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment",
+        "frequency": "monthly",
+        "current_amount": 149.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-03-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-04-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-05-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-06-06",
+            "amount": 149.0
+          },
+          {
+            "date": "2026-07-06",
+            "amount": 149.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      },
+      {
+        "id": "sub_7",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services",
+        "frequency": "monthly",
+        "current_amount": 75.0,
+        "confidence": 0.98,
+        "price_change": {
+          "increased": false,
+          "amount_change": 0.0,
+          "percent_change": 0.0
+        },
+        "history": [
+          {
+            "date": "2026-02-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-03-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-04-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-05-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-06-04",
+            "amount": 75.0
+          },
+          {
+            "date": "2026-07-04",
+            "amount": 75.0
+          }
+        ],
+        "recommended_action": "Keep",
+        "action_reason": "Regular usage, standard pricing.",
+        "monthly_saving": 0.0
+      }
+    ],
+    "all_transactions": [
+      {
+        "date": "2026-07-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-07-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-07-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-07-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-07-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-07-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-06-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-06-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-06-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-06-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-05-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-05-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-05-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-05-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-04-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-04-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-04-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 649.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-04-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-03-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-03-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-03-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-03-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS AXIS",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-20",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS ICICI",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-19",
+        "raw_description": "UPI/NETFLIX.COM/AXIS",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-19",
+        "raw_description": "UPI/NETFLIX.COM/ICICI",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-18",
+        "raw_description": "UPI/SPOTIFY INDIA AXIS",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-18",
+        "raw_description": "UPI/SPOTIFY INDIA ICICI",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-16",
+        "raw_description": "APPLE.COM/BILL ICLOUD STATE BANK OF INDIA",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP AXIS",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-15",
+        "raw_description": "SWIGGY ONE MEMBERSHIP ICICI",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-13",
+        "raw_description": "SWIGGY ONE MEMBERSHIP STATE BANK OF INDIA",
+        "amount": 299.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Swiggy One",
+        "category": "Food & Delivery"
+      },
+      {
+        "date": "2026-02-07",
+        "raw_description": "CULTFIT HEALTHCARE AXIS",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-07",
+        "raw_description": "CULTFIT HEALTHCARE ICICI",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      },
+      {
+        "date": "2026-02-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM AXIS",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-06",
+        "raw_description": "GOOGLE *YOUTUBEPREM ICICI",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-05",
+        "raw_description": "GOOGLE *YOUTUBEPREM STATE BANK OF INDIA",
+        "amount": 149.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "YouTube Premium",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "AUTOPAY ADOBE SYSTEMS STATE BANK OF INDIA",
+        "amount": 1675.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Adobe Creative Cloud",
+        "category": "Software"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD AXIS",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-04",
+        "raw_description": "APPLE.COM/BILL ICLOUD ICICI",
+        "amount": 75.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Apple iCloud",
+        "category": "Cloud Services"
+      },
+      {
+        "date": "2026-02-02",
+        "raw_description": "UPI/NETFLIX.COM/STATE BANK OF INDIA",
+        "amount": 499.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Netflix",
+        "category": "Entertainment"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "UPI/SPOTIFY INDIA STATE BANK OF INDIA",
+        "amount": 119.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Spotify",
+        "category": "Music"
+      },
+      {
+        "date": "2026-02-01",
+        "raw_description": "CULTFIT HEALTHCARE STATE BANK OF INDIA",
+        "amount": 1250.0,
+        "type": "debit",
+        "source": "pdf_table",
+        "merchant": "Cult.fit Pass",
+        "category": "Fitness"
+      }
+    ]
+  }
+}

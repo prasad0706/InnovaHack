@@ -10,6 +10,8 @@ COLUMN_ALIASES = {
     "balance": ["balance", "closing balance", "running balance", "bal"],
 }
 
+HEADER_WORDS = {"date", "txn date", "value date", "narration", "description", "particulars", "debit", "credit", "withdrawal", "deposit", "balance", "chq/ref no", "ref no"}
+
 def match_column(header_cell: str) -> Optional[str]:
     if not header_cell:
         return None
@@ -20,22 +22,20 @@ def match_column(header_cell: str) -> Optional[str]:
             return canonical
     return None
 
+def is_repeated_header_row(row: List[Any]) -> bool:
+    row_text = " ".join([str(c).lower().strip() for c in row if c]).strip()
+    match_count = sum(1 for hw in HEADER_WORDS if hw in row_text)
+    return match_count >= 2
+
 def extract_tables_from_pdf(pdf) -> List[Dict[str, Any]]:
-    """
-    Tier 1 generic table extractor.
-    Iterates over pages, extracts tables, matches headers dynamically,
-    and returns list of standardized raw transaction dictionaries.
-    """
     raw_transactions = []
     
-    for page in pdf.pages:
-        # Strategy 1: strict line-based grid
+    for page_num, page in enumerate(pdf.pages):
         tables = page.extract_tables({
             "vertical_strategy": "lines_strict",
             "horizontal_strategy": "lines_strict",
         })
         
-        # Fallback Strategy 2: text alignment
         if not tables or all(len(t) == 0 for t in tables):
             tables = page.extract_tables({
                 "vertical_strategy": "text",
@@ -46,7 +46,6 @@ def extract_tables_from_pdf(pdf) -> List[Dict[str, Any]]:
             if not table or len(table) < 2:
                 continue
                 
-            # Header analysis
             header_row = table[0]
             col_map = {}
             for idx, cell in enumerate(header_row):
@@ -55,12 +54,15 @@ def extract_tables_from_pdf(pdf) -> List[Dict[str, Any]]:
                     if col_name:
                         col_map[col_name] = idx
                         
-            # Must at least identify date, description, and an amount/debit column
             if "date" not in col_map or "description" not in col_map:
                 continue
                 
             for row in table[1:]:
                 if not row or len(row) <= max(col_map.values(), default=0):
+                    continue
+                    
+                # Skip repeated header rows across multi-page PDFs
+                if is_repeated_header_row(row):
                     continue
                     
                 date_val = str(row[col_map["date"]]).strip() if row[col_map["date"]] else ""

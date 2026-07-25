@@ -1,28 +1,146 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../models/subscription_model.dart';
+import '../models/transaction_model.dart';
+import '../utils/safe_storage.dart';
 
 class AnalysisProvider extends ChangeNotifier {
   bool _isAnalyzed = false;
   bool _isLoading = false;
   String? _errorMessage;
 
+  String _userName = 'Vedant';
+  String _accountLabel = 'Primary Bank Account';
+  double _monthlySavingsGoal = 3000.0;
+
+  bool _isBankConnected = false;
+  String _connectedBankName = 'HDFC Bank';
+
   Map<String, dynamic> _summary = {};
   List<SubscriptionItem> _subscriptions = [];
+  List<TransactionRecord> _allTransactions = [];
   Set<String> _simulatedCancelledIds = {};
 
   bool get isAnalyzed => _isAnalyzed;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+
+  String get userName => _userName;
+  String get accountLabel => _accountLabel;
+  double get monthlySavingsGoal => _monthlySavingsGoal;
+
+  bool get isBankConnected => _isBankConnected;
+  String get connectedBankName => _connectedBankName;
+
   Map<String, dynamic> get summary => _summary;
   List<SubscriptionItem> get subscriptions => _subscriptions;
+  List<TransactionRecord> get allTransactions => _allTransactions;
   Set<String> get simulatedCancelledIds => _simulatedCancelledIds;
 
-  // Active Screen Navigation Tab Index
   int _activeTabIndex = 0;
   int get activeTabIndex => _activeTabIndex;
 
+  void setTab(int index) {
+    _activeTabIndex = index;
+    notifyListeners();
+  }
+
+  AnalysisProvider() {
+    _loadFromPreferences();
+  }
+
+  Future<void> _loadFromPreferences() async {
+    try {
+      _userName = (await SafeStorage.getString('user_name')) ?? 'Vedant';
+      _accountLabel = (await SafeStorage.getString('account_label')) ?? 'Primary Bank Account';
+      _monthlySavingsGoal = (await SafeStorage.getDouble('monthly_savings_goal')) ?? 3000.0;
+      _isBankConnected = (await SafeStorage.getBool('is_bank_connected')) ?? false;
+      _connectedBankName = (await SafeStorage.getString('connected_bank_name')) ?? 'HDFC Bank';
+
+      final savedJson = await SafeStorage.getString('cached_analysis_data');
+      if (savedJson != null) {
+        final data = jsonDecode(savedJson) as Map<String, dynamic>;
+        _summary = data['summary'] as Map<String, dynamic>? ?? {};
+
+        final rawSubs = (data['subscriptions'] as List<dynamic>? ?? []);
+        _subscriptions = rawSubs
+            .asMap()
+            .entries
+            .map((entry) => SubscriptionItem.fromJson(
+                  entry.value as Map<String, dynamic>,
+                  entry.key,
+                ))
+            .toList();
+
+        final rawTxns = (data['all_transactions'] as List<dynamic>? ?? []);
+        _allTransactions = rawTxns
+            .map((e) => TransactionRecord.fromJson(e as Map<String, dynamic>))
+            .toList();
+        _allTransactions.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+
+        _simulatedCancelledIds = _subscriptions
+            .where((s) => s.recommendedAction != 'Keep')
+            .map((s) => s.id)
+            .toSet();
+
+        _isAnalyzed = true;
+      }
+    } catch (e) {
+      debugPrint('Failed to load cached analysis: $e');
+    }
+    notifyListeners();
+  }
+
+  Future<void> _saveToPreferences(Map<String, dynamic> data) async {
+    try {
+      await SafeStorage.setString('cached_analysis_data', jsonEncode(data));
+      await SafeStorage.setString('user_name', _userName);
+      await SafeStorage.setString('account_label', _accountLabel);
+      await SafeStorage.setDouble('monthly_savings_goal', _monthlySavingsGoal);
+      await SafeStorage.setBool('is_bank_connected', _isBankConnected);
+      await SafeStorage.setString('connected_bank_name', _connectedBankName);
+    } catch (e) {
+      debugPrint('Failed to save analysis cache: $e');
+    }
+  }
+
+  Future<void> setBankConnection({required bool isConnected, String? bankName}) async {
+    _isBankConnected = isConnected;
+    if (bankName != null && bankName.isNotEmpty) {
+      _connectedBankName = bankName;
+      _accountLabel = '$bankName Account';
+    }
+    try {
+      await SafeStorage.setBool('is_bank_connected', _isBankConnected);
+      await SafeStorage.setString('connected_bank_name', _connectedBankName);
+      await SafeStorage.setString('account_label', _accountLabel);
+    } catch (e) {
+      debugPrint('Failed to set bank connection state: $e');
+    }
+    notifyListeners();
+  }
+
+  Future<void> updateUserProfile({
+    String? name,
+    String? label,
+    double? goal,
+  }) async {
+    if (name != null) _userName = name;
+    if (label != null) _accountLabel = label;
+    if (goal != null) _monthlySavingsGoal = goal;
+
+    try {
+      await SafeStorage.setString('user_name', _userName);
+      await SafeStorage.setString('account_label', _accountLabel);
+      await SafeStorage.setDouble('monthly_savings_goal', _monthlySavingsGoal);
+    } catch (e) {
+      debugPrint('Failed to update profile: $e');
+    }
+    notifyListeners();
+  }
+
   void setActiveTab(int index) {
-    if (index != 0 && !_isAnalyzed) return; // Prevent locked tab navigation
+    if (index != 0 && !_isAnalyzed) return;
     _activeTabIndex = index;
     notifyListeners();
   }
@@ -44,27 +162,42 @@ class AnalysisProvider extends ChangeNotifier {
     _errorMessage = null;
     _isAnalyzed = true;
 
+    if (data['is_bank_connected'] == true || data['summary']?['bank_connected'] != null) {
+      _isBankConnected = true;
+      if (data['connected_bank'] != null) {
+        _connectedBankName = data['connected_bank'];
+      } else if (data['summary']?['bank_connected'] != null) {
+        _connectedBankName = data['summary']['bank_connected'];
+      }
+      _accountLabel = '$_connectedBankName Account';
+    }
+
     _summary = data['summary'] as Map<String, dynamic>? ?? {};
 
     final rawSubs = (data['subscriptions'] as List<dynamic>? ?? []);
     _subscriptions = rawSubs
         .asMap()
         .entries
-        .map(
-          (entry) => SubscriptionItem.fromJson(
-            entry.value as Map<String, dynamic>,
-            entry.key,
-          ),
-        )
+        .map((entry) => SubscriptionItem.fromJson(
+              entry.value as Map<String, dynamic>,
+              entry.key,
+            ))
         .toList();
 
-    // Default select all cancel/downgrade items in simulator
+    final rawTxns = (data['all_transactions'] as List<dynamic>? ?? []);
+    _allTransactions = rawTxns
+        .map((e) => TransactionRecord.fromJson(e as Map<String, dynamic>))
+        .toList();
+    _allTransactions.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+
     _simulatedCancelledIds = _subscriptions
         .where((s) => s.recommendedAction != 'Keep')
         .map((s) => s.id)
         .toSet();
 
-    _activeTabIndex = 1; // Auto navigate to Dashboard after upload
+    _saveToPreferences(data);
+
+    _activeTabIndex = 1;
     notifyListeners();
   }
 
@@ -77,113 +210,70 @@ class AnalysisProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void reset() {
-    _isAnalyzed = false;
-    _isLoading = false;
-    _errorMessage = null;
-    _summary = {};
-    _subscriptions = [];
-    _simulatedCancelledIds = {};
-    _activeTabIndex = 0;
+  void selectAllSimulatorActions() {
+    _simulatedCancelledIds = _subscriptions
+        .where((s) => s.recommendedAction != 'Keep')
+        .map((s) => s.id)
+        .toSet();
     notifyListeners();
   }
 
-  int _calculateHealthScore({
-    required List<SubscriptionItem> subscriptions,
-    required Set<String> cancelledIds,
-  }) {
-    if (subscriptions.isEmpty) return 100;
-
-    double totalSpend = 0;
-    double leakage = 0;
-    int priceHikesCount = 0;
-    int highCostNonEssentialsCount = 0;
-    Map<String, int> categoryCounts = {};
-
-    for (var s in subscriptions) {
-      bool isActioned = cancelledIds.contains(s.id);
-      
-      double simulatedAmount = s.current_amount;
-      String simulatedAction = s.recommendedAction;
-      bool hasPriceHike = s.priceChange?.increased ?? false;
-
-      if (isActioned) {
-        if (s.recommendedAction == 'Cancel') {
-          continue;
-        } else if (s.recommendedAction == 'Downgrade') {
-          simulatedAmount = s.current_amount - s.monthlySaving;
-          simulatedAction = 'Keep';
-          hasPriceHike = false;
-        }
-      }
-
-      totalSpend += simulatedAmount;
-      if (simulatedAction != 'Keep') {
-        leakage += simulatedAmount;
-      }
-
-      if (hasPriceHike) {
-        priceHikesCount++;
-      }
-
-      if (simulatedAction == 'Cancel' && simulatedAmount > 500) {
-        highCostNonEssentialsCount++;
-      }
-
-      // Track active subscriptions in categories (excluding 'Duplicate' category if we are mapping duplicates)
-      String cat = s.category;
-      categoryCounts[cat] = (categoryCounts[cat] ?? 0) + 1;
-    }
-
-    if (totalSpend == 0) return 100;
-
-    // 1. Leakage Ratio Penalty (Max -50 points)
-    double leakageRatio = leakage / totalSpend;
-    double leakagePenalty = leakageRatio * 50;
-
-    // 2. Price Hike Penalty (-5 points per hike)
-    double priceHikePenalty = priceHikesCount * 5.0;
-
-    // 3. Duplicate Subscriptions Penalty (-10 points per category with duplicates)
-    int duplicateCategoriesCount = 0;
-    categoryCounts.forEach((category, count) {
-      if (count > 1) {
-        duplicateCategoriesCount++;
-      }
-    });
-    // Also include explicit 'Duplicate' categories or count from backend
-    int explicitDuplicates = subscriptions
-        .where((s) => !cancelledIds.contains(s.id) && s.category == 'Duplicate')
-        .length;
-    double duplicatePenalty = (duplicateCategoriesCount + explicitDuplicates) * 10.0;
-
-    // 4. High-Cost Non-Essential Penalty (-5 points each)
-    double highCostPenalty = highCostNonEssentialsCount * 5.0;
-
-    double rawScore = 100 - leakagePenalty - priceHikePenalty - duplicatePenalty - highCostPenalty;
-    return rawScore.round().clamp(15, 98);
+  void resetSimulatorActions() {
+    _simulatedCancelledIds.clear();
+    notifyListeners();
   }
 
-  // Derived Metrics
+  Future<void> reset() async {
+    _isAnalyzed = false;
+    _isLoading = false;
+    _errorMessage = null;
+    _isBankConnected = false;
+    _summary = {};
+    _subscriptions = [];
+    _allTransactions = [];
+    _simulatedCancelledIds = {};
+    _activeTabIndex = 0;
+
+    try {
+      await SafeStorage.remove('cached_analysis_data');
+      await SafeStorage.setBool('is_bank_connected', false);
+    } catch (e) {
+      debugPrint('Failed to clear cache: $e');
+    }
+    notifyListeners();
+  }
+
   int get baseHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    return _calculateHealthScore(
-      subscriptions: _subscriptions,
-      cancelledIds: const {},
-    );
+    double totalSpend = _subscriptions.fold(0, (sum, s) => sum + s.currentAmount);
+    double leakage = _subscriptions
+        .where((s) => s.recommendedAction != 'Keep')
+        .fold(0, (sum, s) => sum + s.currentAmount);
+
+    if (totalSpend == 0) return 100;
+    double ratio = leakage / totalSpend;
+    int score = (100 - (ratio * 65)).round();
+    return score.clamp(15, 98);
   }
 
   int get simulatedHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    return _calculateHealthScore(
-      subscriptions: _subscriptions,
-      cancelledIds: _simulatedCancelledIds,
-    );
+    double totalSpend = _subscriptions.fold(0, (sum, s) => sum + s.currentAmount);
+    double remainingLeakage = _subscriptions
+        .where((s) =>
+            s.recommendedAction != 'Keep' &&
+            !_simulatedCancelledIds.contains(s.id))
+        .fold(0, (sum, s) => sum + s.currentAmount);
+
+    if (totalSpend == 0) return 100;
+    double ratio = remainingLeakage / totalSpend;
+    int score = (100 - (ratio * 65)).round();
+    return score.clamp(15, 98);
   }
 
   double get monthlyLeakage => _subscriptions
       .where((s) => s.recommendedAction != 'Keep')
-      .fold(0, (sum, s) => sum + s.current_amount);
+      .fold(0, (sum, s) => sum + s.currentAmount);
 
   double get potentialMonthlySavings => _subscriptions
       .where((s) => s.recommendedAction != 'Keep')
@@ -200,7 +290,4 @@ class AnalysisProvider extends ChangeNotifier {
 
   int get duplicateCount =>
       _subscriptions.where((s) => s.category == 'Duplicate').length;
-
-  int get cancelCount =>
-      _subscriptions.where((s) => s.recommendedAction == 'Cancel').length;
 }

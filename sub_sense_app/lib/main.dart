@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/analysis_provider.dart';
+import 'providers/auth_provider.dart';
 import 'theme/app_colors.dart';
 import 'widgets/nav_shell.dart';
 import 'screens/upload_screen.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/subscriptions_screen.dart';
 import 'screens/simulator_screen.dart';
+import 'screens/actions_screen.dart';
+import 'screens/ai_coach_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => AnalysisProvider()),
       ],
       child: const SubSenseApp(),
@@ -63,10 +67,10 @@ class MainNavigationScreen extends StatelessWidget {
         currentBody = const SimulatorScreen();
         break;
       case 4:
-        currentBody = const Center(child: Text('Actions (Phase 6)'));
+        currentBody = const ActionsScreen();
         break;
       case 5:
-        currentBody = const Center(child: Text('AI Coach (Phase 6)'));
+        currentBody = const AICoachScreen();
         break;
       default:
         currentBody = const UploadScreen();

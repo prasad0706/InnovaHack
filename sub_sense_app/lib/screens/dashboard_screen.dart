@@ -7,6 +7,8 @@ import '../theme/app_typography.dart';
 import '../widgets/card_container.dart';
 import '../widgets/health_gauge.dart';
 import '../widgets/money_text.dart';
+import '../widgets/user_profile_modal.dart';
+import '../widgets/transaction_ledger_modal.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -28,371 +30,403 @@ class DashboardScreen extends StatelessWidget {
         .where((s) => s.recommendedAction != 'Keep')
         .length;
 
-    // Highest price hike info
     final hikedSubs = provider.subscriptions
         .where((s) => s.priceChange?.increased == true)
         .toList();
-    hikedSubs.sort(
-      (a, b) => (b.priceChange?.percentChange ?? 0).compareTo(
-        a.priceChange?.percentChange ?? 0,
-      ),
-    );
+    hikedSubs.sort((a, b) => (b.priceChange?.percentChange ?? 0)
+        .compareTo(a.priceChange?.percentChange ?? 0));
     final topHike = hikedSubs.isNotEmpty ? hikedSubs.first : null;
 
-    // Duplicate services
     final duplicateSubs = provider.subscriptions
         .where((s) => s.category == 'Duplicate')
         .toList();
 
-    // Cancel recommendations
     final cancelSubs = provider.subscriptions
         .where((s) => s.recommendedAction == 'Cancel')
         .toList();
-    final cancelSavings = cancelSubs.fold(
-      0.0,
-      (sum, s) => sum + s.current_amount,
-    );
+    final cancelSavings =
+        cancelSubs.fold(0.0, (sum, s) => sum + s.currentAmount);
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+    double goalProgress = (provider.potentialMonthlySavings / provider.monthlySavingsGoal).clamp(0.0, 1.0);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
       child: Center(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 1024),
+          constraints: const BoxConstraints(maxWidth: 1080),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'FINANCIAL HEALTH',
-                style: AppTypography.eyebrow(color: AppColors.signalGreen),
-              ),
-              const SizedBox(height: 8),
-
-              // Hero 2-Column Layout
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  bool isNarrow = constraints.maxWidth < 720;
-                  Widget gaugeWidget = HealthGauge(score: score, size: 220);
-
-                  Widget statsWidget = Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        headline,
-                        style: AppTypography.headlineLarge(
-                          color: AppColors.ink,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Based on analysis of ${provider.summary['total_transactions_found'] ?? 84} transactions in your bank statement.',
-                        style: AppTypography.bodyMedium(color: AppColors.slate),
-                      ),
-                      const SizedBox(height: 28),
-
-                      // 4 Stat Pairs Grid
-                      Wrap(
-                        spacing: 32,
-                        runSpacing: 20,
+              // TOP WELCOME & GOAL BANNER
+              CardContainer(
+                backgroundColor: AppColors.paperDim,
+                borderColor: AppColors.line,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.ink,
+                      child: Icon(Icons.person_rounded, color: AppColors.paper, size: 18),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _StatPair(
-                            label: 'Monthly Leakage',
-                            child: MoneyText(
-                              amount: provider.monthlyLeakage,
-                              size: MoneySize.medium,
-                              color: AppColors.coral,
-                            ),
-                          ),
-                          _StatPair(
-                            label: 'Potential Savings',
-                            child: MoneyText(
-                              amount: provider.potentialMonthlySavings,
-                              size: MoneySize.medium,
-                              color: AppColors.signalGreen,
-                            ),
-                          ),
-                          _StatPair(
-                            label: 'Subscriptions',
-                            child: Text(
-                              '$totalSubs detected',
-                              style: AppTypography.monoMedium(
-                                color: AppColors.ink,
+                          Row(
+                            children: [
+                              Text(
+                                'Welcome back, ${provider.userName}!',
+                                style: AppTypography.titleLarge(color: AppColors.ink).copyWith(fontSize: 15),
                               ),
-                            ),
-                          ),
-                          _StatPair(
-                            label: 'Need Attention',
-                            child: Text(
-                              '$needAttention flagged',
-                              style: AppTypography.monoMedium(
-                                color: needAttention > 0
-                                    ? AppColors.amber
-                                    : AppColors.signalGreen,
+                              const SizedBox(width: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: AppColors.signalGreen.withValues(alpha: 0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  provider.accountLabel,
+                                  style: AppTypography.monoSmall(color: AppColors.signalGreen).copyWith(fontSize: 10),
+                                ),
                               ),
-                            ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: LinearProgressIndicator(
+                                    value: goalProgress,
+                                    minHeight: 6,
+                                    backgroundColor: AppColors.line,
+                                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.signalGreen),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                'Goal: ₹${provider.potentialMonthlySavings.toStringAsFixed(0)} / ₹${provider.monthlySavingsGoal.toStringAsFixed(0)}',
+                                style: AppTypography.monoSmall(color: AppColors.slate).copyWith(fontSize: 11),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  );
-
-                  if (isNarrow) {
-                    return Column(
-                      children: [
-                        Center(child: gaugeWidget),
-                        const SizedBox(height: 32),
-                        statsWidget,
-                      ],
-                    );
-                  }
-
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      gaugeWidget,
-                      const SizedBox(width: 48),
-                      Expanded(child: statsWidget),
-                    ],
-                  );
-                },
+                    ),
+                    const SizedBox(width: 14),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.ink,
+                        side: const BorderSide(color: AppColors.line),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      ),
+                      onPressed: () => UserProfileModal.show(context),
+                      icon: const Icon(Icons.edit_outlined, size: 14),
+                      label: Text('Edit Target', style: AppTypography.monoSmall(color: AppColors.ink).copyWith(fontSize: 11)),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(height: 20),
 
-              const SizedBox(height: 48),
+              // MAIN SINGLE VIEW DASHBOARD GRID
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    bool isNarrow = constraints.maxWidth < 840;
 
-              // Row of 3 Flag Cards
-              Text(
-                'Key Findings',
-                style: AppTypography.titleLarge(color: AppColors.ink),
-              ),
-              const SizedBox(height: 16),
+                    Widget mainGaugePanel = Container(
+                      padding: const EdgeInsets.all(22),
+                      decoration: BoxDecoration(
+                        color: AppColors.paper,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: AppColors.line),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'FINANCIAL HEALTH SCORE',
+                                style: AppTypography.eyebrow(color: AppColors.signalGreen).copyWith(fontSize: 10),
+                              ),
+                              TextButton.icon(
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  minimumSize: Size.zero,
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                onPressed: () => TransactionLedgerModal.show(context),
+                                icon: const Icon(Icons.receipt_long_rounded, size: 14, color: AppColors.signalGreen),
+                                label: Text(
+                                  'View Statement Ledger',
+                                  style: AppTypography.monoSmall(color: AppColors.signalGreen).copyWith(
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
 
-              LayoutBuilder(
-                builder: (context, constraints) {
-                  bool stackCards = constraints.maxWidth < 800;
+                          Row(
+                            children: [
+                              HealthGauge(score: score, size: 170),
+                              const SizedBox(width: 24),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      headline,
+                                      style: AppTypography.headlineMedium(color: AppColors.ink).copyWith(fontSize: 20),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      'Based on analysis of ${provider.summary['total_transactions_found'] ?? provider.allTransactions.length} parsed transactions.',
+                                      style: AppTypography.bodySmall(color: AppColors.slate),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          const Divider(color: AppColors.line, height: 1),
+                          const SizedBox(height: 16),
 
-                  List<Widget> cards = [
-                    // Flag Card 1: Price Increases
-                    Expanded(
-                      flex: stackCards ? 0 : 1,
-                      child: CardContainer(
-                        backgroundColor: AppColors.coral.withValues(
-                          alpha: 0.08,
-                        ),
-                        borderColor: AppColors.coral.withValues(alpha: 0.3),
-                        onTap: () =>
-                            provider.setActiveTab(2), // Subscriptions tab
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.trending_up_rounded,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              _StatPair(
+                                label: 'Monthly Leakage',
+                                child: MoneyText(
+                                  amount: provider.monthlyLeakage,
+                                  size: MoneySize.small,
                                   color: AppColors.coral,
-                                  size: 20,
                                 ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Price Increase Detected',
-                                  style: AppTypography.labelBold(
-                                    color: AppColors.coral,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              '${hikedSubs.length} Subscription${hikedSubs.length == 1 ? '' : 's'} Hiked',
-                              style: AppTypography.titleLarge(
-                                color: AppColors.ink,
                               ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              topHike != null
-                                  ? '${topHike.merchant} +${topHike.priceChange?.percentChange}% (₹${topHike.priceChange?.amountChange.toInt()})'
-                                  : 'No silent price hikes found',
-                              style: AppTypography.bodySmall(
-                                color: AppColors.slate,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    if (stackCards)
-                      const SizedBox(height: 16)
-                    else
-                      const SizedBox(width: 16),
-
-                    // Flag Card 2: Duplicate Services
-                    Expanded(
-                      flex: stackCards ? 0 : 1,
-                      child: CardContainer(
-                        backgroundColor: AppColors.amber.withValues(
-                          alpha: 0.08,
-                        ),
-                        borderColor: AppColors.amber.withValues(alpha: 0.3),
-                        onTap: () =>
-                            provider.setActiveTab(2), // Subscriptions tab
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.content_copy_rounded,
-                                  color: AppColors.amber,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Duplicate Services',
-                                  style: AppTypography.labelBold(
-                                    color: AppColors.amber,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              '${duplicateSubs.length} Overlapping Service${duplicateSubs.length == 1 ? '' : 's'}',
-                              style: AppTypography.titleLarge(
-                                color: AppColors.ink,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              duplicateSubs.isNotEmpty
-                                  ? duplicateSubs
-                                        .map((s) => s.merchant)
-                                        .join(', ')
-                                  : 'YouTube Premium & Netflix',
-                              style: AppTypography.bodySmall(
-                                color: AppColors.slate,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    if (stackCards)
-                      const SizedBox(height: 16)
-                    else
-                      const SizedBox(width: 16),
-
-                    // Flag Card 3: Recommended to Cancel
-                    Expanded(
-                      flex: stackCards ? 0 : 1,
-                      child: CardContainer(
-                        backgroundColor: AppColors.paperDim,
-                        borderColor: AppColors.line,
-                        onTap: () => provider.setActiveTab(4), // Actions tab
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.cancel_outlined,
-                                  color: AppColors.slate,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Recommended to Cancel',
-                                  style: AppTypography.labelBold(
-                                    color: AppColors.slate,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              '${cancelSubs.length} Subscription${cancelSubs.length == 1 ? '' : 's'}',
-                              style: AppTypography.titleLarge(
-                                color: AppColors.ink,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Text(
-                                  'Save up to ',
-                                  style: AppTypography.bodySmall(
-                                    color: AppColors.slate,
-                                  ),
-                                ),
-                                MoneyText(
-                                  amount: cancelSavings,
+                              _StatPair(
+                                label: 'Potential Savings',
+                                child: MoneyText(
+                                  amount: provider.potentialMonthlySavings,
                                   size: MoneySize.small,
                                   color: AppColors.signalGreen,
                                 ),
-                                Text(
-                                  ' / mo',
-                                  style: AppTypography.bodySmall(
-                                    color: AppColors.slate,
+                              ),
+                              _StatPair(
+                                label: 'Subscriptions',
+                                child: Text(
+                                  '$totalSubs active',
+                                  style: AppTypography.monoSmall(color: AppColors.ink).copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              _StatPair(
+                                label: 'Need Attention',
+                                child: Text(
+                                  '$needAttention flagged',
+                                  style: AppTypography.monoSmall(
+                                    color: needAttention > 0 ? AppColors.amber : AppColors.signalGreen,
+                                  ).copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const Spacer(),
+
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.ink,
+                                    foregroundColor: AppColors.paper,
+                                    padding: const EdgeInsets.symmetric(vertical: 14),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  ),
+                                  onPressed: () => provider.setTab(3),
+                                  icon: const Icon(Icons.tune_rounded, size: 16),
+                                  label: Text(
+                                    'Savings Simulator',
+                                    style: AppTypography.labelBold(color: AppColors.paper).copyWith(fontSize: 13),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  style: OutlinedButton.styleFrom(
+                                    foregroundColor: AppColors.ink,
+                                    side: const BorderSide(color: AppColors.line, width: 1.5),
+                                    padding: const EdgeInsets.symmetric(vertical: 14),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  ),
+                                  onPressed: () => provider.setTab(2),
+                                  icon: const Icon(Icons.list_alt_rounded, size: 16),
+                                  label: Text(
+                                    'View Subscriptions',
+                                    style: AppTypography.labelBold(color: AppColors.ink).copyWith(fontSize: 13),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+
+                    Widget keyFindingsPanel = Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'KEY FINDINGS & ALERTS',
+                          style: AppTypography.eyebrow(color: AppColors.slate).copyWith(fontSize: 10),
+                        ),
+                        const SizedBox(height: 12),
+
+                        CardContainer(
+                          padding: const EdgeInsets.all(16),
+                          backgroundColor: AppColors.coral.withValues(alpha: 0.08),
+                          borderColor: AppColors.coral.withValues(alpha: 0.3),
+                          onTap: () => provider.setTab(2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.trending_up_rounded, color: AppColors.coral, size: 18),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Price Hike Alerts',
+                                    style: AppTypography.labelBold(color: AppColors.coral).copyWith(fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                '${hikedSubs.length} Subscription${hikedSubs.length == 1 ? '' : 's'} Hiked',
+                                style: AppTypography.titleLarge(color: AppColors.ink).copyWith(fontSize: 15),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                topHike != null
+                                    ? '${topHike.merchant} +${topHike.priceChange?.percentChange}% (₹${topHike.priceChange?.amountChange.toInt()})'
+                                    : 'No silent price hikes found',
+                                style: AppTypography.bodySmall(color: AppColors.slate),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        CardContainer(
+                          padding: const EdgeInsets.all(16),
+                          backgroundColor: AppColors.amber.withValues(alpha: 0.08),
+                          borderColor: AppColors.amber.withValues(alpha: 0.3),
+                          onTap: () => provider.setTab(2),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.content_copy_rounded, color: AppColors.amber, size: 18),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Duplicate Services',
+                                    style: AppTypography.labelBold(color: AppColors.amber).copyWith(fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                '${duplicateSubs.length} Overlapping Service${duplicateSubs.length == 1 ? '' : 's'}',
+                                style: AppTypography.titleLarge(color: AppColors.ink).copyWith(fontSize: 15),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                duplicateSubs.isNotEmpty
+                                    ? duplicateSubs.map((s) => s.merchant).join(', ')
+                                    : 'YouTube Premium & Netflix',
+                                style: AppTypography.bodySmall(color: AppColors.slate),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+
+                        CardContainer(
+                          padding: const EdgeInsets.all(16),
+                          backgroundColor: AppColors.paperDim,
+                          borderColor: AppColors.line,
+                          onTap: () => provider.setTab(4),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(Icons.cancel_outlined, color: AppColors.slate, size: 18),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Action Recommended',
+                                    style: AppTypography.labelBold(color: AppColors.slate).copyWith(fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                '${cancelSubs.length} Plan${cancelSubs.length == 1 ? '' : 's'} to Action',
+                                style: AppTypography.titleLarge(color: AppColors.ink).copyWith(fontSize: 15),
+                              ),
+                              const SizedBox(height: 2),
+                              Row(
+                                children: [
+                                  Text('Save up to ', style: AppTypography.bodySmall(color: AppColors.slate)),
+                                  MoneyText(
+                                    amount: cancelSavings,
+                                    size: MoneySize.small,
+                                    color: AppColors.signalGreen,
+                                  ),
+                                  Text(' / mo', style: AppTypography.bodySmall(color: AppColors.slate)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+
+                    if (isNarrow) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            mainGaugePanel,
+                            const SizedBox(height: 20),
+                            keyFindingsPanel,
                           ],
                         ),
-                      ),
-                    ),
-                  ];
+                      );
+                    }
 
-                  return stackCards
-                      ? Column(children: cards)
-                      : Row(children: cards);
-                },
-              ),
-
-              const SizedBox(height: 48),
-
-              // Bottom Call to Action Buttons
-              Row(
-                children: [
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.ink,
-                      foregroundColor: AppColors.paper,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () => provider.setActiveTab(3), // Simulator Tab
-                    icon: const Icon(Icons.tune_rounded, size: 18),
-                    label: Text(
-                      'Try the savings simulator',
-                      style: AppTypography.labelBold(color: AppColors.paper),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.ink,
-                      side: const BorderSide(color: AppColors.line, width: 1.5),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () =>
-                        provider.setActiveTab(2), // Subscriptions Tab
-                    icon: const Icon(Icons.list_alt_rounded, size: 18),
-                    label: Text(
-                      'View all subscriptions',
-                      style: AppTypography.labelBold(color: AppColors.ink),
-                    ),
-                  ),
-                ],
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex: 3, child: mainGaugePanel),
+                        const SizedBox(width: 24),
+                        Expanded(flex: 2, child: keyFindingsPanel),
+                      ],
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -415,9 +449,9 @@ class _StatPair extends StatelessWidget {
       children: [
         Text(
           label.toUpperCase(),
-          style: AppTypography.eyebrow(
-            color: AppColors.slate,
-          ).copyWith(fontSize: 10),
+          style: AppTypography.eyebrow(color: AppColors.slate).copyWith(
+            fontSize: 9,
+          ),
         ),
         const SizedBox(height: 4),
         child,
