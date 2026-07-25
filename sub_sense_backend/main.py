@@ -9,7 +9,7 @@ from ingestion.table_extractor import extract_tables_from_pdf
 from ingestion.regex_fallback import fallback_parse
 from cleaning.transaction_cleaner import clean_transactions
 from cleaning.merchant_normalizer import normalize_transactions
-from detection.subscription_detector import detect_subscriptions
+from detection.subscription_detector import detect_subscriptions, calculate_health_score
 
 app = FastAPI(
     title="SubSense API",
@@ -113,6 +113,9 @@ async def upload_statement(
 
     # 6. Detect recurring subscriptions & price hikes
     subscriptions = detect_subscriptions(normalized_txns)
+    
+    # 7. Calculate baseline health score
+    health_score = calculate_health_score(subscriptions)
 
     dates = [t["date"] for t in cleaned_txns if t.get("date")]
     dates.sort()
@@ -126,6 +129,7 @@ async def upload_statement(
             "subscriptions_detected": len(subscriptions),
             "parsing_method": parsing_method,
             "date_range": {"from_date": from_date, "to_date": to_date},
+            "health_score": health_score,
         },
         "subscriptions": subscriptions,
     }

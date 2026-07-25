@@ -10,6 +10,7 @@ class AnalysisSummary(BaseModel):
     subscriptions_detected: int
     parsing_method: str  # "table" | "regex_fallback"
     date_range: Optional[DateRange] = None
+    health_score: Optional[int] = None
 
 class PriceChangeSchema(BaseModel):
     increased: bool

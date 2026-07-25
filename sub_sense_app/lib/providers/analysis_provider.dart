@@ -88,41 +88,97 @@ class AnalysisProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _calculateHealthScore({
+    required List<SubscriptionItem> subscriptions,
+    required Set<String> cancelledIds,
+  }) {
+    if (subscriptions.isEmpty) return 100;
+
+    double totalSpend = 0;
+    double leakage = 0;
+    int priceHikesCount = 0;
+    int highCostNonEssentialsCount = 0;
+    Map<String, int> categoryCounts = {};
+
+    for (var s in subscriptions) {
+      bool isActioned = cancelledIds.contains(s.id);
+      
+      double simulatedAmount = s.current_amount;
+      String simulatedAction = s.recommendedAction;
+      bool hasPriceHike = s.priceChange?.increased ?? false;
+
+      if (isActioned) {
+        if (s.recommendedAction == 'Cancel') {
+          continue;
+        } else if (s.recommendedAction == 'Downgrade') {
+          simulatedAmount = s.current_amount - s.monthlySaving;
+          simulatedAction = 'Keep';
+          hasPriceHike = false;
+        }
+      }
+
+      totalSpend += simulatedAmount;
+      if (simulatedAction != 'Keep') {
+        leakage += simulatedAmount;
+      }
+
+      if (hasPriceHike) {
+        priceHikesCount++;
+      }
+
+      if (simulatedAction == 'Cancel' && simulatedAmount > 500) {
+        highCostNonEssentialsCount++;
+      }
+
+      // Track active subscriptions in categories (excluding 'Duplicate' category if we are mapping duplicates)
+      String cat = s.category;
+      categoryCounts[cat] = (categoryCounts[cat] ?? 0) + 1;
+    }
+
+    if (totalSpend == 0) return 100;
+
+    // 1. Leakage Ratio Penalty (Max -50 points)
+    double leakageRatio = leakage / totalSpend;
+    double leakagePenalty = leakageRatio * 50;
+
+    // 2. Price Hike Penalty (-5 points per hike)
+    double priceHikePenalty = priceHikesCount * 5.0;
+
+    // 3. Duplicate Subscriptions Penalty (-10 points per category with duplicates)
+    int duplicateCategoriesCount = 0;
+    categoryCounts.forEach((category, count) {
+      if (count > 1) {
+        duplicateCategoriesCount++;
+      }
+    });
+    // Also include explicit 'Duplicate' categories or count from backend
+    int explicitDuplicates = subscriptions
+        .where((s) => !cancelledIds.contains(s.id) && s.category == 'Duplicate')
+        .length;
+    double duplicatePenalty = (duplicateCategoriesCount + explicitDuplicates) * 10.0;
+
+    // 4. High-Cost Non-Essential Penalty (-5 points each)
+    double highCostPenalty = highCostNonEssentialsCount * 5.0;
+
+    double rawScore = 100 - leakagePenalty - priceHikePenalty - duplicatePenalty - highCostPenalty;
+    return rawScore.round().clamp(15, 98);
+  }
+
   // Derived Metrics
   int get baseHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    double totalSpend = _subscriptions.fold(
-      0,
-      (sum, s) => sum + s.current_amount,
+    return _calculateHealthScore(
+      subscriptions: _subscriptions,
+      cancelledIds: const {},
     );
-    double leakage = _subscriptions
-        .where((s) => s.recommendedAction != 'Keep')
-        .fold(0, (sum, s) => sum + s.current_amount);
-
-    if (totalSpend == 0) return 100;
-    double ratio = leakage / totalSpend;
-    int score = (100 - (ratio * 65)).round();
-    return score.clamp(15, 98);
   }
 
   int get simulatedHealthScore {
     if (!_isAnalyzed || _subscriptions.isEmpty) return 100;
-    double totalSpend = _subscriptions.fold(
-      0,
-      (sum, s) => sum + s.current_amount,
+    return _calculateHealthScore(
+      subscriptions: _subscriptions,
+      cancelledIds: _simulatedCancelledIds,
     );
-    double remainingLeakage = _subscriptions
-        .where(
-          (s) =>
-              s.recommendedAction != 'Keep' &&
-              !_simulatedCancelledIds.contains(s.id),
-        )
-        .fold(0, (sum, s) => sum + s.current_amount);
-
-    if (totalSpend == 0) return 100;
-    double ratio = remainingLeakage / totalSpend;
-    int score = (100 - (ratio * 65)).round();
-    return score.clamp(15, 98);
   }
 
   double get monthlyLeakage => _subscriptions

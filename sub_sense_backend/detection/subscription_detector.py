@@ -92,3 +92,62 @@ def detect_subscriptions(transactions: List[Dict[str, Any]]) -> List[Dict[str, A
         sub_index += 1
 
     return subscriptions
+
+
+def calculate_health_score(subscriptions: List[Dict[str, Any]]) -> int:
+    """
+    Calculate the baseline Financial Health / Leak Score using the same formula
+    as the client-side Flutter implementation.
+    """
+    if not subscriptions:
+        return 100
+
+    total_spend = 0.0
+    leakage = 0.0
+    price_hikes_count = 0
+    high_cost_non_essentials_count = 0
+    category_counts = {}
+
+    for s in subscriptions:
+        amount = s["current_amount"]
+        action = s.get("recommended_action", "Keep")
+        has_price_hike = s.get("price_change", {}).get("increased", False)
+        category = s.get("category", "General")
+
+        total_spend += amount
+        if action != "Keep":
+            leakage += amount
+
+        if has_price_hike:
+            price_hikes_count += 1
+
+        if action == "Cancel" and amount > 500:
+            high_cost_non_essentials_count += 1
+
+        category_counts[category] = category_counts.get(category, 0) + 1
+
+    if total_spend == 0:
+        return 100
+
+    # 1. Leakage Ratio Penalty (Max -50 points)
+    leakage_ratio = leakage / total_spend
+    leakage_penalty = leakage_ratio * 50
+
+    # 2. Price Hike Penalty (-5 points per hike)
+    price_hike_penalty = price_hikes_count * 5.0
+
+    # 3. Duplicate Subscriptions Penalty (-10 points per category with duplicates)
+    duplicate_categories_count = 0
+    for cat, count in category_counts.items():
+        if count > 1:
+            duplicate_categories_count += 1
+
+    # Also count explicit 'Duplicate' category if any
+    explicit_duplicates = sum(1 for s in subscriptions if s.get("category") == "Duplicate")
+    duplicate_penalty = (duplicate_categories_count + explicit_duplicates) * 10.0
+
+    # 4. High-Cost Non-Essential Penalty (-5 points each)
+    high_cost_penalty = high_cost_non_essentials_count * 5.0
+
+    raw_score = 100 - leakage_penalty - price_hike_penalty - duplicate_penalty - high_cost_penalty
+    return max(15, min(98, round(raw_score)))
